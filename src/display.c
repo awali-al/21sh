@@ -1,18 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   21sh.c                                             :+:      :+:    :+:   */
+/*   display.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/19 15:15:48 by awali-al          #+#    #+#             */
-/*   Updated: 2020/01/19 20:49:23 by awali-al         ###   ########.fr       */
+/*   Created: 2019/09/29 14:34:30 by awali-al          #+#    #+#             */
+/*   Updated: 2020/01/21 20:01:38 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/21sh.h"
+#include "../includes/to_sh.h"
 
-int		main(int ac, char **av, char **ev)
+void	display_prompt(int c)
 {
-    
+	char		*col;
+	char		*path;
+	static char	*tmp;
+
+	if (c)
+		col = GREEN_COL;
+	else
+		col = RED_COL;
+	path = getcwd(NULL, 0);
+	if (path)
+	{
+		tmp = ft_strrchr(path, '/');
+		tmp = tmp && tmp[1] ? tmp + 1 : path;
+		ft_strdel(&path);
+	}
+	ft_putstr(tmp);
+	ft_putstr(col);
+	ft_putstr(" $> ");
+	ft_putstr(RESET_COL);
 }
