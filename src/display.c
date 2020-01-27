@@ -6,17 +6,17 @@
 /*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/29 14:34:30 by awali-al          #+#    #+#             */
-/*   Updated: 2020/01/21 20:01:38 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/01/25 20:51:19 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/to_sh.h"
 
-void	display_prompt(int c)
+int		display_prompt(int c)
 {
 	char		*col;
 	char		*path;
-	static char	*tmp;
+	static char	*tmp = NULL;
 
 	if (c)
 		col = GREEN_COL;
@@ -25,12 +25,14 @@ void	display_prompt(int c)
 	path = getcwd(NULL, 0);
 	if (path)
 	{
+		ft_strdel(&tmp);
 		tmp = ft_strrchr(path, '/');
-		tmp = tmp && tmp[1] ? tmp + 1 : path;
+		tmp = tmp && tmp[1] ? ft_strdup(tmp + 1) : ft_strdup(path);
 		ft_strdel(&path);
 	}
 	ft_putstr(tmp);
 	ft_putstr(col);
 	ft_putstr(" $> ");
 	ft_putstr(RESET_COL);
+	return (ft_strlen(tmp + 4));
 }
