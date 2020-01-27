@@ -6,7 +6,7 @@
 /*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 13:46:50 by awali-al          #+#    #+#             */
-/*   Updated: 2020/01/27 20:29:10 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/01/27 21:50:18 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,12 @@ static void	add_in_pos(char **str, char b, int pos)
 	ft_strdel(&tmp);
 }
 
-static void	store_print(char **ret, char b, int *i, int op)
+static void	store_print(char **ret, char b, t_pos *i, int op)
 {
 	if (ft_isprint(b))
 	{
-		add_in_pos(ret, b, op + *i);
-		put_in_pos(b, op, *i);
+		add_in_pos(ret, b, op + i->col);
+		put_in_pos(i, b, op);
 		i++;
 	}
 	else
@@ -70,15 +70,15 @@ static void	store_print(char **ret, char b, int *i, int op)
 
 char		*get_line(int op)
 {
+	t_pos	i;
 	char	*ret;
 	int		b;
 	int		c;
-	int		i;
 
 	set_input_mode();
 	c = 0;
-	i = 0;
 	b = 0;
+	i = ini_pos();
 	ret = ft_strnew(1);
 	while (1)
 	{

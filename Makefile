@@ -6,7 +6,7 @@
 #    By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/05 14:26:42 by aminewalial       #+#    #+#              #
-#    Updated: 2020/01/26 18:00:58 by awali-al         ###   ########.fr        #
+#    Updated: 2020/01/27 20:34:32 by awali-al         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,8 @@ FLAGS = -Wall -Wextra -Werror
 
 SRC_DIR = src
 
-SRC_FILES =  to_sh.c envirenement.c exit_check.c display.c get_line.c canon.c
+SRC_FILES =  to_sh.c envirenement.c exit_check.c display.c get_line.c canon.c \
+put_in_pos.c
 
 SRC = $(addprefix $(SRC_DIR)/, SRC_FILES)
 

@@ -1,36 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   read_line.c                                        :+:      :+:    :+:   */
+/*   put_in_pos.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/15 11:46:22 by awali-al          #+#    #+#             */
-/*   Updated: 2020/01/26 13:46:23 by awali-al         ###   ########.fr       */
+/*   Created: 2020/01/27 20:34:36 by awali-al          #+#    #+#             */
+/*   Updated: 2020/01/27 20:45:48 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/to_sh.h"
 
-void	read_line(char **line)
+void	put_in_pos(char b, int pos)
 {
-	char	*tmp;
-	char	buf[2];
-	int		i;
+	struct winsize	ws;
+	int				col;
+	int				row;
 
-	tmp = ft_strnew(1);
-	while ((i = read(0, &buf, 1)))
+	ioctl(STDIN_FILENO, TIOCGWINSZ, &ws);
+	row = get_row();
+	if (pos > ws.ws_col)
 	{
-		buf[1] = '\0';
-		if (buf[0] == '\n')
-			break ;
-		*line = ft_strjoin(tmp, buf);
-		ft_strdel(&tmp);
-		tmp = *line;
+		row++;
+		pos -= ws.ws_col;
 	}
-	if (!i)
-	{
-		write(1, "\n", 1);
-		ft_strdel(line);
-	}
+	
 }
