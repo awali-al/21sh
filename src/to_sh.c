@@ -6,7 +6,7 @@
 /*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/19 15:15:48 by awali-al          #+#    #+#             */
-/*   Updated: 2020/01/26 19:39:50 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/01/28 14:38:06 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int		main(int ac, char **av, char **ev)
 {
 	char	***cmd_arr;
 	char	*line;
-	int		op;
+	t_pos	pos;
 
 	(void)av;
 	ac = 1;
@@ -26,8 +26,8 @@ int		main(int ac, char **av, char **ev)
 	while (exit_check(line))
 	{
 		ft_strdel(&line);
-		op = display_prompt(ac);
-		line = get_line(op);
+		pos.col = display_prompt(ac);
+		line = get_line(pos);
 		ft_putstr(line);
 	}
 	line ? ft_strdel(&line) : 0;

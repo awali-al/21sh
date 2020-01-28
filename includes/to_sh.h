@@ -6,7 +6,7 @@
 /*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/19 15:16:22 by awali-al          #+#    #+#             */
-/*   Updated: 2020/01/27 21:19:23 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/01/28 14:40:28 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int					display_prompt(int c);
 
 void				set_input_mode(void);
 void				reset_input_mode(void);
-char				*get_line(int op);
+char				*get_line(t_pos pos);
 void				put_in_pos(char b, int pos);
 
 #endif
