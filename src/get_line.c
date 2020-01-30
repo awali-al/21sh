@@ -6,7 +6,7 @@
 /*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 13:46:50 by awali-al          #+#    #+#             */
-/*   Updated: 2020/01/28 14:43:28 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/01/30 20:59:33 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,19 +56,19 @@ static void	add_in_pos(char **str, char b, int pos)
 	ft_strdel(&tmp);
 }
 
-static void	store_print(char **ret, char b, t_pos *i, t_pos pos)
+static void	store_print(char **ret, char b, int *i, int pos)
 {
 	if (ft_isprint(b))
 	{
-		add_in_pos(ret, b, pos + i->col);
-		put_in_pos(i, b, pos);
-		i++;
+		add_in_pos(ret, b, *i);
+		put_in_pos(*ret + *i, *i, pos);
+		(*i)++;
 	}
 	else
 		special_char(b, i, pos);
 }
 
-char		*get_line(t_pos pos)
+char		*get_line(int pos)
 {
 	char	*ret;
 	int		b;

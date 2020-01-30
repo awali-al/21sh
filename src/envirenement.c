@@ -6,7 +6,7 @@
 /*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 11:06:42 by awali-al          #+#    #+#             */
-/*   Updated: 2020/01/21 19:50:13 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/01/30 14:53:49 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,21 @@ char		*value_of(char **env, char *key)
 	if (env[i])
 		ret = ft_strchr(env[i], '=') + 1;
 	return (ret);
+}
+
+void		free_2d(char ***dar)
+{
+	int		i;
+
+	i = 0;
+	if (dar)
+		while ((*dar)[i])
+		{
+			ft_strdel(&(*dar)[i]);
+			i++;
+		}
+	free(*dar);
+	*dar = NULL;
 }
 
 char		**my_envirenement(char **env)

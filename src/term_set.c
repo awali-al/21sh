@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   canon.c                                            :+:      :+:    :+:   */
+/*   term_set.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/26 17:58:28 by awali-al          #+#    #+#             */
-/*   Updated: 2020/01/26 18:00:48 by awali-al         ###   ########.fr       */
+/*   Created: 2020/01/30 14:44:40 by awali-al          #+#    #+#             */
+/*   Updated: 2020/01/30 16:13:54 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,29 @@ void	set_input_mode(void)
 	tattr.c_cc[VMIN] = 1;
 	tattr.c_cc[VTIME] = 0;
 	tcsetattr(STDIN_FILENO, TCSAFLUSH, &tattr);
+}
+
+int		term_set(void)
+{
+	char	*term_type;
+	int		ret;
+
+	if (!(term_type = getenv("TERM")))
+	{
+		ft_putendl_fd("TERM is not set.", 2);
+		return (-1);
+	}
+	if ((ret = tgetent(NULL, term_type)) == -1)
+	{
+		ft_putendl_fd("Could not access to the termcap database.", 2);
+		return (-1);
+	}
+	else if (!ret)
+	{
+		ft_putstr_fd("Terminal type: ", 2);
+		ft_putstr_fd(term_type, 2);
+		ft_putendl_fd(" is not defined in termcap database.", 2);
+		return (-1);
+	}
+	return (0);
 }
