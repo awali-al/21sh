@@ -6,7 +6,7 @@
 /*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 13:46:50 by awali-al          #+#    #+#             */
-/*   Updated: 2020/01/30 20:59:33 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/02/01 00:20:18 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,42 +30,20 @@ static int	qdq_con(int b, int c)
 		return (0);
 }
 
-static void	add_in_pos(char **str, char b, int pos)
-{
-	char	*tmp;
-	int		n;
-	int		i;
-	int		j;
-
-	i = 0;
-	j = 0;
-	tmp = *str;
-	n = ft_strlen(tmp);
-	*str = ft_strnew(n + 1);
-	while (tmp[i])
-	{
-		if (i != pos)
-		{
-			(*str)[j] = tmp[i];
-			i++;
-		}
-		else
-			(*str)[j] = b;
-		j++;
-	}
-	ft_strdel(&tmp);
-}
-
-static void	store_print(char **ret, char b, int *i, int pos)
+static void	store_print(char **ret, int b, int *curs, int pos)
 {
 	if (ft_isprint(b))
-	{
-		add_in_pos(ret, b, *i);
-		put_in_pos(*ret + *i, *i, pos);
-		(*i)++;
-	}
-	else
-		special_char(b, i, pos);
+		add_in_pos(ret, b, curs);
+	else if (b == RIGHT && *curs < ft_strlen(*ret))
+		go_right(curs, 1);
+	else if (b == END)
+		go_right(curs, ft_strlen(*ret + *curs));
+	else if (b == HOME)
+		go_left(curs, *curs);
+	else if (b == LEFT && *curs)
+		go_left(curs, 1);
+	else if (b == BACKSPACE && *curs)
+		del_in_pos(ret, curs);
 }
 
 char		*get_line(int pos)
@@ -73,21 +51,22 @@ char		*get_line(int pos)
 	char	*ret;
 	int		b;
 	int		c;
-	int		i;
+	int		curs;
 
 	set_input_mode();
 	c = 0;
-	b = 0;
-	ret = ft_strnew(1);
+	curs = 0;
+	ret = ft_strdup("");
 	while (1)
 	{
-		read(STDIN_FILENO, &b, 4);
+		b = 0;
+		read(0, &b, 4);
 		if (condition(b, c))
 			break ;
 		else
 		{
 			c = qdq_con(b, c);
-			store_print(&ret, b, &i, pos);
+			store_print(&ret, b, &curs, pos);
 		}
 	}
 	reset_input_mode();

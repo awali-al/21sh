@@ -6,17 +6,11 @@
 /*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/29 14:34:30 by awali-al          #+#    #+#             */
-/*   Updated: 2020/01/30 21:06:02 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/01/31 17:42:36 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/to_sh.h"
-
-int		to_putchar(int c)
-{
-	write(1, &c, 1);
-	return (c);
-}
 
 int		display_prompt(int c)
 {

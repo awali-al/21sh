@@ -6,7 +6,7 @@
 /*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/19 15:16:22 by awali-al          #+#    #+#             */
-/*   Updated: 2020/01/30 21:06:28 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/02/01 00:14:32 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,20 @@
 # define RESET_COL	"\x1b[37m"
 # define CLR_SCRN	"\033[2J"
 
-typedef struct		s_hash
+# define UP			4283163
+# define DOWN		4348699
+# define LEFT		4479771
+# define RIGHT		4414235
+# define HOME		4741915
+# define END		4610843
+# define BACKSPACE	127
+
+typedef struct		s_line
 {
-	char			*cmd;
-	char			*pth;
-	struct s_hash	*nxt;
-}					t_hash;
+	char			*str;
+	int				curs;
+	int				b;
+}					t_line;
 
 typedef struct		s_pos
 {
@@ -41,16 +49,20 @@ typedef struct		s_pos
 extern struct termios g_saved_attributes;
 
 int					to_putchar(int c);
+void				go_right(int *curs, int n);
+void				go_left(int *curs, int n);
 
 char				**my_envirenement(char **env);
 char				*value_of(char **env, char *key);
 void				free_2d(char ***dar);
 int					term_set(void);
-int					exit_check(char *line);
 int					display_prompt(int c);
 
 void				set_input_mode(void);
 void				reset_input_mode(void);
 char				*get_line(int pos);
+void				put_in_pos(char *str);
+void				add_in_pos(char **str, char b, int *curs);
+void				del_in_pos(char **str, int *curs);
 
 #endif

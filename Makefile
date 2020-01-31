@@ -6,18 +6,18 @@
 #    By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/05 14:26:42 by aminewalial       #+#    #+#              #
-#    Updated: 2020/01/30 16:14:19 by awali-al         ###   ########.fr        #
+#    Updated: 2020/01/31 19:59:27 by awali-al         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = 21sh
 
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -ltermcap
 
 SRC_DIR = src
 
-SRC_FILES =  to_sh.c envirenement.c exit_check.c display.c get_line.c term_set.c
-put_in_pos.c
+SRC_FILES =  to_sh.c envirenement.c exit_check.c display.c get_line.c term_set.c \
+edit_in_pos.c cursor.c
 
 SRC = $(addprefix $(SRC_DIR)/, SRC_FILES)
 
@@ -27,7 +27,7 @@ OBJ = $(addprefix $(OBJ_DIR)/, $(SRC_FILES:.c=.o))
 
 LIB = libft/libft.a
 
-HEADER = includes/21sh.h
+HEADER = includes/to_sh.h
 
 all : $(NAME)
 

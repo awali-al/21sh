@@ -6,7 +6,7 @@
 /*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 14:44:40 by awali-al          #+#    #+#             */
-/*   Updated: 2020/01/30 16:13:54 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/01/31 18:49:16 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,25 +22,22 @@ void	reset_input_mode(void)
 void	set_input_mode(void)
 {
 	struct termios	tattr;
-	char			*name;
+	char			*term_type;
+	int				ret;
 
-	if (!isatty(STDIN_FILENO))
-	{
-		dprintf(2, "Not a terminal.\n");
-		exit(EXIT_FAILURE);
-	}
-	tcgetattr(STDIN_FILENO, &g_saved_attributes);
-	tcgetattr(STDIN_FILENO, &tattr);
+	term_type = getenv("TERM");
+	ret = tgetent(0, term_type);
+	tcgetattr(0, &tattr);
 	tattr.c_lflag &= ~(ICANON | ECHO);
 	tattr.c_cc[VMIN] = 1;
 	tattr.c_cc[VTIME] = 0;
-	tcsetattr(STDIN_FILENO, TCSAFLUSH, &tattr);
+	tcsetattr(0, TCSAFLUSH, &tattr);
 }
 
 int		term_set(void)
 {
-	char	*term_type;
-	int		ret;
+	char			*term_type;
+	int				ret;
 
 	if (!(term_type = getenv("TERM")))
 	{
