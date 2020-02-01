@@ -6,7 +6,7 @@
 /*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 19:56:41 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/01 17:28:51 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/02/01 21:45:06 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,32 +20,32 @@ void	put_in_pos(char *str)
 	tputs(tgetstr("rc", NULL), 1, to_putchar);
 }
 
-void	add_in_pos(t_line *line)
+void	add_in_pos(t_line **line)
 {
 	char	*tmp;
 	int		i;
 
 	i = 0;
-	tmp = ft_strnew(ft_strlen(line->str) + 1);
-	while (i < line->curs)
+	tmp = ft_strnew(ft_strlen((*line)->str) + 1);
+	while (i < (*line)->curs)
 	{
-		tmp[i] = line->str[i];
+		tmp[i] = (*line)->str[i];
 		i++;
 	}
-	tmp[i] = line->buf;
+	tmp[i] = (*line)->buf;
 	i++;
-	while (i < ft_strlen((line->str)) + 1)
+	while (i < ft_strlen(((*line)->str)) + 1)
 	{
-		tmp[i] = line->str[i - 1];
+		tmp[i] = (*line)->str[i - 1];
 		i++;
 	}
-	ft_strdel(&line->str);
-	line->str = tmp;
-	put_in_pos(line->str + line->curs);
+	ft_strdel(&((*line)->str));
+	(*line)->str = tmp;
+	put_in_pos((*line)->str + (*line)->curs);
 	go_right(line);
 }
 
-void	del_in_pos(t_line *line)
+void	del_in_pos(t_line **line)
 {
 	char	*tmp;
 	int		i;
@@ -54,17 +54,17 @@ void	del_in_pos(t_line *line)
 	i = 0;
 	j = 0;
 	go_left(line);
-	tmp = ft_strnew(ft_strlen(line->str) - 1);
-	while (line->str[i])
+	tmp = ft_strnew(ft_strlen((*line)->str) - 1);
+	while ((*line)->str[i])
 	{
-		if (i != line->curs)
+		if (i != (*line)->curs)
 		{
-			tmp[j] = line->str[i];
+			tmp[j] = (*line)->str[i];
 			j++;
 		}
 		i++;
 	}
-	ft_strdel(&line->str);
-	line->str = tmp;
-	put_in_pos(line->str + line->curs);
+	ft_strdel(&((*line)->str));
+	(*line)->str = tmp;
+	put_in_pos((*line)->str + (*line)->curs);
 }

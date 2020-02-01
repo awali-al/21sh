@@ -6,7 +6,7 @@
 /*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/19 15:16:22 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/01 21:01:05 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/02/01 21:49:53 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@
 
 typedef struct		s_line
 {
+	struct s_line	*prv;
+	struct s_line	*nxt;
 	char			*str;
 	int				curs;
 	int				buf;
@@ -47,8 +49,8 @@ typedef struct		s_line
 extern struct termios g_saved_attributes;
 
 int					to_putchar(int c);
-void				go_right(t_line *line);
-void				go_left(t_line *line);
+void				go_right(t_line **line);
+void				go_left(t_line **line);
 void				home(t_line *line);
 void				end(t_line *line);
 
@@ -60,9 +62,9 @@ int					display_prompt(int c);
 
 void				set_input_mode(void);
 void				reset_input_mode(void);
-char				*get_line(int prm);
+char				*get_line(t_line **bot, int prm);
 void				put_in_pos(char *str);
-void				add_in_pos(t_line *line);
-void				del_in_pos(t_line *line);
+void				add_in_pos(t_line **line);
+void				del_in_pos(t_line **line);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 17:41:17 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/01 21:09:15 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/02/01 21:49:46 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,17 +33,18 @@ int		curow(void)
 	return (ret);
 }
 
-void	go_right(t_line *line)
+void	go_right(t_line **line)
 {
 	int		l;
 
-	l = ft_strlen(line->str) + line->prm;
-	(line->curs)++;
-	if ((line->curs + line->prm) % line->col == 0)
+	l = ft_strlen((*line)->str) + (*line)->prm;
+	(*line)->curs++;
+	if (((*line)->curs + (*line)->prm) % (*line)->col == 0)
 	{
-		if (line->row != curow())
+		if ((*line)->row != curow())
 			tputs(tgetstr("do", NULL), 1, to_putchar);
-		else if (line->row != curow() && line->curs != l && l % line->col == 0)
+		else if ((*line)->row != curow() && (*line)->curs != l
+				&& l % (*line)->col == 0)
 			tputs(tgetstr("up", NULL), 1, to_putchar);
 		tputs(tgetstr("cr", NULL), 1, to_putchar);
 	}
@@ -51,14 +52,14 @@ void	go_right(t_line *line)
 		tputs(tgetstr("nd", NULL), 1, to_putchar);
 }
 
-void	go_left(t_line *line)
+void	go_left(t_line **line)
 {
-	if (((line->curs + line->prm) % line->col) == 0)
+	if ((((*line)->curs + (*line)->prm) % (*line)->col) == 0)
 	{
 		tputs(tgetstr("up", NULL), 1, to_putchar);
-		tputs(tgoto(tgetstr("ch", NULL), 0, line->col - 1), 1, to_putchar);
+		tputs(tgoto(tgetstr("ch", NULL), 0, (*line)->col - 1), 1, to_putchar);
 	}
 	else
 		tputs(tgetstr("le", NULL), 1, to_putchar);
-	line->curs--;
+	(*line)->curs--;
 }
