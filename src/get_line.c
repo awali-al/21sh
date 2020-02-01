@@ -6,7 +6,7 @@
 /*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 13:46:50 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/01 00:20:18 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/02/01 00:58:40 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,24 +30,25 @@ static int	qdq_con(int b, int c)
 		return (0);
 }
 
-static void	store_print(char **ret, int b, int *curs, int pos)
+static void	store_print(t_line *line, int pos)
 {
-	if (ft_isprint(b))
-		add_in_pos(ret, b, curs);
-	else if (b == RIGHT && *curs < ft_strlen(*ret))
-		go_right(curs, 1);
-	else if (b == END)
-		go_right(curs, ft_strlen(*ret + *curs));
-	else if (b == HOME)
-		go_left(curs, *curs);
-	else if (b == LEFT && *curs)
-		go_left(curs, 1);
-	else if (b == BACKSPACE && *curs)
-		del_in_pos(ret, curs);
+	if (ft_isprint(line->b))
+		add_in_pos(line);
+	else if (line->b == RIGHT && line->curs < ft_strlen(line->str))
+		go_right(&line->curs, 1);
+	else if (line->b == END)
+		go_right(&line->curs, ft_strlen(line->str + line->curs));
+	else if (line->b == HOME)
+		go_left(&line->curs, line->curs);
+	else if (line->b == LEFT && line->curs)
+		go_left(&line->curs, 1);
+	else if (line->b == BACKSPACE && line->curs)
+		del_in_pos(&line->str, &line->curs);
 }
 
 char		*get_line(int pos)
 {
+	t_line	*line;
 	char	*ret;
 	int		b;
 	int		c;
@@ -55,8 +56,9 @@ char		*get_line(int pos)
 
 	set_input_mode();
 	c = 0;
-	curs = 0;
-	ret = ft_strdup("");
+	line = (t_line*)malloc(sizeof(line));
+	line->curs = 0;
+	line->str = ft_strdup("");
 	while (1)
 	{
 		b = 0;
@@ -66,9 +68,9 @@ char		*get_line(int pos)
 		else
 		{
 			c = qdq_con(b, c);
-			store_print(&ret, b, &curs, pos);
+			store_print(line, pos);
 		}
 	}
 	reset_input_mode();
-	return (ret);
+	return (line->str);
 }
