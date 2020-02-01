@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   get_line.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aminewalialami <aminewalialami@student.    +#+  +:+       +#+        */
+/*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 13:46:50 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/01 11:30:02 by aminewalial      ###   ########.fr       */
+/*   Updated: 2020/02/01 21:00:57 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/to_sh.h"
 
-static int	condition(int b, int c)
+static int		condition(int b, int c)
 {
 	if (b == '\004' || (!c && b == '\n'))
 		return (1);
@@ -20,7 +20,7 @@ static int	condition(int b, int c)
 		return (0);
 }
 
-static int	qdq_con(int b, int c)
+static int		qdq_con(int b, int c)
 {
 	if (c && b != c)
 		return (c);
@@ -30,44 +30,51 @@ static int	qdq_con(int b, int c)
 		return (0);
 }
 
-static void	store_print(t_line *line, int pos)
+static void		store_print(t_line *line)
 {
-	if (ft_isprint(line->b))
+	if (ft_isprint(line->buf))
 		add_in_pos(line);
-	else if (line->b == BACKSPACE && line->curs)
+	else if (line->buf == BACKSPACE && line->curs)
 		del_in_pos(line);
-	else if (line->b == RIGHT && line->curs < ft_strlen(line->str))
-		go_right(&line->curs, 1);
-	else if (line->b == LEFT && line->curs)
-		go_left(&line->curs, 1);
-	else if (line->b == END)
-		go_right(&line->curs, ft_strlen(line->str + line->curs));
-	else if (line->b == HOME)
-		go_left(&line->curs, line->curs);
+	else if (line->buf == RIGHT && line->curs < ft_strlen(line->str))
+		go_right(line);
+	else if (line->buf == LEFT && line->curs)
+		go_left(line);
 }
 
-char		*get_line(int pos)
+static t_line	line_ini(int prm)
 {
-	t_line	*line;
-	int		c;
+	struct winsize	ws;
+	t_line			ret;
+
+	ioctl(0, TIOCGWINSZ, &ws);
+	ret.str = ft_strdup("");
+	ret.col = ws.ws_col;
+	ret.row = ws.ws_row;
+	ret.prm = prm;
+	ret.curs = 0;
+	ret.con = 0;
+	return (ret);
+}
+
+char			*get_line(int prm)
+{
+	t_line			line;
 
 	set_input_mode();
-	c = 0;
-	line = (t_line*)malloc(sizeof(line));
-	line->curs = 0;
-	line->str = ft_strdup("");
+	line = line_ini(prm);
 	while (1)
 	{
-		line->b = 0;
-		read(0, &line->b, 4);
-		if (condition(line->b, c))
+		line.buf = 0;
+		read(0, &line.buf, 4);
+		if (condition(line.buf, line.con))
 			break ;
 		else
 		{
-			c = qdq_con(line->b, c);
-			store_print(line, pos);
+			store_print(&line);
+			line.con = qdq_con(&line.buf, line.con);
 		}
 	}
 	reset_input_mode();
-	return (line->str);
+	return (line.str);
 }

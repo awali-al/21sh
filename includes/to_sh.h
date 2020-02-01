@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   to_sh.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aminewalialami <aminewalialami@student.    +#+  +:+       +#+        */
+/*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/19 15:16:22 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/01 11:30:19 by aminewalial      ###   ########.fr       */
+/*   Updated: 2020/02/01 21:01:05 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,20 +37,20 @@ typedef struct		s_line
 {
 	char			*str;
 	int				curs;
-	int				b;
-}					t_line;
-
-typedef struct		s_pos
-{
+	int				buf;
 	int				col;
 	int				row;
-}					t_pos;
+	int				prm;
+	int				con;
+}					t_line;
 
 extern struct termios g_saved_attributes;
 
 int					to_putchar(int c);
-void				go_right(int *curs, int n);
-void				go_left(int *curs, int n);
+void				go_right(t_line *line);
+void				go_left(t_line *line);
+void				home(t_line *line);
+void				end(t_line *line);
 
 char				**my_envirenement(char **env);
 char				*value_of(char **env, char *key);
@@ -60,7 +60,7 @@ int					display_prompt(int c);
 
 void				set_input_mode(void);
 void				reset_input_mode(void);
-char				*get_line(int pos);
+char				*get_line(int prm);
 void				put_in_pos(char *str);
 void				add_in_pos(t_line *line);
 void				del_in_pos(t_line *line);

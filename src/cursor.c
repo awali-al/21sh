@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cursor.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aminewalialami <aminewalialami@student.    +#+  +:+       +#+        */
+/*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 17:41:17 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/01 12:32:56 by aminewalial      ###   ########.fr       */
+/*   Updated: 2020/02/01 21:09:15 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,65 +18,47 @@ int		to_putchar(int c)
 	return (0);
 }
 
-t_pos	get_curs(void)
+int		curow(void)
 {
-	char			**arr;
-	char			buf[5];
-	t_pos			ret;
+	char	**arr;
+	char	buf[5];
+	int		ret;
 
 	write(1, "\033[6n", 4);
 	read(0, &buf, 4);
 	buf[4] = '\0';
 	arr = ft_strsplit(buf, ';');
-	ret.row = ft_atoi(arr[0]);
-	ret.col = ft_atoi(arr[1]);
+	ret = ft_atoi(arr[0]);
 	free_2d(&arr);
 	return (ret);
 }
 
-void	go_right(int *curs, int n)
+void	go_right(t_line *line)
 {
-	struct winsize	ws;
-	t_pos			cp;
-	int				i;
+	int		l;
 
-	i = 0;
-	ioctl(0, TIOCGWINSZ, &ws);
-	cp = get_curs();
-	while (i < n)
+	l = ft_strlen(line->str) + line->prm;
+	(line->curs)++;
+	if ((line->curs + line->prm) % line->col == 0)
 	{
-		if (*curs < ws.ws_col)
-			tputs(tgetstr("nd", NULL), 1, to_putchar);
-		else
-		{
-			if (cp.row < ws.ws_row)
-				tputs(tgetstr("do", NULL), 1, to_putchar);
-			tputs(tgetstr("cr", NULL), 1, to_putchar);
-		}		
-		(*curs)++;
-		i++;
+		if (line->row != curow())
+			tputs(tgetstr("do", NULL), 1, to_putchar);
+		else if (line->row != curow() && line->curs != l && l % line->col == 0)
+			tputs(tgetstr("up", NULL), 1, to_putchar);
+		tputs(tgetstr("cr", NULL), 1, to_putchar);
 	}
+	else
+		tputs(tgetstr("nd", NULL), 1, to_putchar);
 }
 
-void	go_left(int *curs, int n)
+void	go_left(t_line *line)
 {
-	struct winsize	ws;
-	t_pos			cp;
-	int				i;
-
-	i = 0;
-	ioctl(0, TIOCGWINSZ, &ws);
-	cp = get_curs();
-	while (i < n)
+	if (((line->curs + line->prm) % line->col) == 0)
 	{
-		if (*curs > ws.ws_col)
-			tputs(tgetstr("le", NULL), 1, to_putchar);
-		else
-		{
-			tputs(tgetstr("up", NULL), 1, to_putchar);
-			write(1, "\33[10C", 4);
-		}
-		(*curs)--;
-		i++;
+		tputs(tgetstr("up", NULL), 1, to_putchar);
+		tputs(tgoto(tgetstr("ch", NULL), 0, line->col - 1), 1, to_putchar);
 	}
+	else
+		tputs(tgetstr("le", NULL), 1, to_putchar);
+	line->curs--;
 }

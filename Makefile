@@ -6,7 +6,7 @@
 #    By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/05 14:26:42 by aminewalial       #+#    #+#              #
-#    Updated: 2020/01/31 19:59:27 by awali-al         ###   ########.fr        #
+#    Updated: 2020/02/01 17:43:39 by awali-al         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ FLAGS = -ltermcap
 SRC_DIR = src
 
 SRC_FILES =  to_sh.c envirenement.c exit_check.c display.c get_line.c term_set.c \
-edit_in_pos.c cursor.c
+edit_in_pos.c cursor.c navigation.c
 
 SRC = $(addprefix $(SRC_DIR)/, SRC_FILES)
 

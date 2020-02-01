@@ -1,38 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   display.c                                          :+:      :+:    :+:   */
+/*   navigation.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/29 14:34:30 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/01 15:15:27 by awali-al         ###   ########.fr       */
+/*   Created: 2020/02/01 17:36:49 by awali-al          #+#    #+#             */
+/*   Updated: 2020/02/01 17:41:30 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/to_sh.h"
 
-int		display_prompt(int c)
+void	home(t_line *line)
 {
-	char		*col;
-	char		*path;
-	static char	*tmp = NULL;
+	int		n;
+	int		i;
 
-	if (c)
-		col = GREEN_COL;
-	else
-		col = RED_COL;
-	path = getcwd(NULL, 0);
-	if (path)
+	i = 0;
+	n = line->curs;
+	while (i < n)
 	{
-		ft_strdel(&tmp);
-		tmp = ft_strrchr(path, '/');
-		tmp = tmp && tmp[1] ? ft_strdup(tmp + 1) : ft_strdup(path);
-		ft_strdel(&path);
+		go_left(line);
+		i++;
 	}
-	ft_putstr(tmp);
-	ft_putstr(col);
-	ft_putstr(" $> ");
-	ft_putstr(RESET_COL);
-	return (ft_strlen(tmp) + 4);
+}
+
+void	end(t_line *line)
+{
+	int		n;
+	int		i;
+
+	i = 0;
+	n = ft_strlen(line->str);
+	while (i < n)
+	{
+		go_right(line);
+		i++;
+	}
 }

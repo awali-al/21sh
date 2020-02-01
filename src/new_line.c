@@ -1,38 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   display.c                                          :+:      :+:    :+:   */
+/*   new_line.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/29 14:34:30 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/01 15:15:27 by awali-al         ###   ########.fr       */
+/*   Created: 2020/02/01 16:52:14 by awali-al          #+#    #+#             */
+/*   Updated: 2020/02/01 19:38:36 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/to_sh.h"
 
-int		display_prompt(int c)
+static int	pri_pro(t_line *line)
 {
-	char		*col;
-	char		*path;
-	static char	*tmp = NULL;
-
-	if (c)
-		col = GREEN_COL;
-	else
-		col = RED_COL;
-	path = getcwd(NULL, 0);
-	if (path)
+	if (line->con = '|')
 	{
-		ft_strdel(&tmp);
-		tmp = ft_strrchr(path, '/');
-		tmp = tmp && tmp[1] ? ft_strdup(tmp + 1) : ft_strdup(path);
-		ft_strdel(&path);
+		ft_putstr("pipe> ");
+		return (6);
 	}
-	ft_putstr(tmp);
-	ft_putstr(col);
-	ft_putstr(" $> ");
-	ft_putstr(RESET_COL);
-	return (ft_strlen(tmp) + 4);
+	else if (line->con == '\'')
+	{
+		ft_putstr("quote> ");
+		return (7);
+	}
+	else if (line->con = '\"')
+	{
+		ft_putstr("dquote> ");
+		return (8);
+	}
+}
+
+void		new_line(t_line *line)
+{
+	char	*tmp;
+
+	add_in_pos(line);
+	tmp = line->cmd;
+	line->cmd = ft_strjoin(tmp, line->str);
+	ft_strdel(&tmp);
+	ft_strdel(&line->str);
+	line->prm = pri_pro(line);
 }
