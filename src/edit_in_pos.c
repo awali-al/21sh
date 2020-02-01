@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   edit_in_pos.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aminewalialami <aminewalialami@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 19:56:41 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/01 01:00:44 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/02/01 11:32:17 by aminewalial      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	add_in_pos(t_line *line)
 	go_right(&line->curs, 1);
 }
 
-void	del_in_pos(char **str, int *curs)
+void	del_in_pos(t_line *line)
 {
 	char	*tmp;
 	int		i;
@@ -53,18 +53,18 @@ void	del_in_pos(char **str, int *curs)
 
 	i = 0;
 	j = 0;
-	go_left(curs, 1);
-	tmp = ft_strnew(ft_strlen(*str) - 1);
-	while ((*str)[i])
+	go_left(&line->curs, 1);
+	tmp = ft_strnew(ft_strlen(line->str) - 1);
+	while (line->str[i])
 	{
-		if (i != *curs)
+		if (i != line->curs)
 		{
-			tmp[j] = (*str)[i];
+			tmp[j] = line->str[i];
 			j++;
 		}
 		i++;
 	}
-	ft_strdel(str);
-	*str = tmp;
-	put_in_pos(*str + *curs);
+	ft_strdel(&line->str);
+	line->str = tmp;
+	put_in_pos(line->str + line->curs);
 }
