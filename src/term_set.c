@@ -6,7 +6,7 @@
 /*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 14:44:40 by awali-al          #+#    #+#             */
-/*   Updated: 2020/01/31 18:49:16 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/02/01 22:53:19 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ struct termios g_saved_attributes;
 
 void	reset_input_mode(void)
 {
-	tcsetattr(STDIN_FILENO, TCSANOW, &g_saved_attributes);
+	tcsetattr(STDIN_FILENO, TCSAFLUSH, &g_saved_attributes);
 }
 
 void	set_input_mode(void)

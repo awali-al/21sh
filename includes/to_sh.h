@@ -6,7 +6,7 @@
 /*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/19 15:16:22 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/01 21:49:53 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/02/02 01:28:25 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,12 @@ void				go_right(t_line **line);
 void				go_left(t_line **line);
 void				home(t_line *line);
 void				end(t_line *line);
+
+t_line				*duplic_history(t_line *bot);
+void				add_to_history(t_line **bot, t_line *line);
+void				clear_history(t_line **bot);
+t_line				*prv_line(t_line *line);
+t_line				*nxt_line(t_line *line);
 
 char				**my_envirenement(char **env);
 char				*value_of(char **env, char *key);

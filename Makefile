@@ -6,18 +6,18 @@
 #    By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/05 14:26:42 by aminewalial       #+#    #+#              #
-#    Updated: 2020/02/01 17:43:39 by awali-al         ###   ########.fr        #
+#    Updated: 2020/02/02 08:32:20 by awali-al         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = 21sh
 
-FLAGS = -ltermcap
+FLAGS = -g -Wall -Wextra -Werror
 
 SRC_DIR = src
 
 SRC_FILES =  to_sh.c envirenement.c exit_check.c display.c get_line.c term_set.c \
-edit_in_pos.c cursor.c navigation.c
+edit_in_pos.c cursor.c navigation.c history.c
 
 SRC = $(addprefix $(SRC_DIR)/, SRC_FILES)
 
@@ -33,7 +33,7 @@ all : $(NAME)
 
 $(NAME) : $(OBJ) $(HEADER)
 	make -C libft/
-	gcc $(FLAGS) -I $(HEADER) $(OBJ) $(LIB) -o $(NAME) 
+	gcc $(FLAGS) -I $(HEADER) $(OBJ) $(LIB) -o $(NAME) -ltermcap
 	clear
 
 $(OBJ) : $(OBJ_DIR)/%.o : $(SRC_DIR)/%.c | $(OBJ_DIR)

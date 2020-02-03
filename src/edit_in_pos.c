@@ -6,7 +6,7 @@
 /*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 19:56:41 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/01 21:45:06 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/02/02 02:47:26 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ void	put_in_pos(char *str)
 void	add_in_pos(t_line **line)
 {
 	char	*tmp;
-	int		i;
+	size_t	i;
 
 	i = 0;
 	tmp = ft_strnew(ft_strlen((*line)->str) + 1);
-	while (i < (*line)->curs)
+	while (i < (size_t)(*line)->curs)
 	{
 		tmp[i] = (*line)->str[i];
 		i++;

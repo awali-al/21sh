@@ -6,7 +6,7 @@
 /*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 13:46:50 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/01 21:50:51 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/02/02 11:22:29 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,15 @@ static void		store_print(t_line **line)
 		add_in_pos(line);
 	else if ((*line)->buf == BACKSPACE && (*line)->curs)
 		del_in_pos(line);
-	else if ((*line)->buf == RIGHT && (*line)->curs < ft_strlen((*line)->str))
+	else if ((*line)->buf == RIGHT &&
+			(*line)->curs < (int)ft_strlen((*line)->str))
 		go_right(line);
 	else if ((*line)->buf == LEFT && (*line)->curs)
 		go_left(line);
+	else if ((*line)->buf == UP)
+		*line = prv_line(*line);
+	else if ((*line)->buf == DOWN)
+		*line = nxt_line(*line);
 }
 
 static t_line	*line_ini(int prm)
@@ -49,7 +54,7 @@ static t_line	*line_ini(int prm)
 
 	ret = (t_line*)malloc(sizeof(t_line));
 	ioctl(0, TIOCGWINSZ, &ws);
-	ret->str = ft_strdup("");
+	ret->str = ft_strnew(1);
 	ret->col = ws.ws_col;
 	ret->row = ws.ws_row;
 	ret->prv = NULL;
@@ -66,6 +71,7 @@ char			*get_line(t_line **bot, int prm)
 
 	set_input_mode();
 	line = line_ini(prm);
+	add_to_history(bot, line);
 	while (1)
 	{
 		line->buf = 0;
@@ -75,10 +81,11 @@ char			*get_line(t_line **bot, int prm)
 		else
 		{
 			store_print(&line);
-			line->con = qdq_con(&line->buf, line->con);
+			line->con = qdq_con(line->buf, line->con);
 		}
 	}
+	// printf("|%s|\n", line->str);
 	reset_input_mode();
-	// add_to_history(bot, line);
+	add_to_history(bot, line);
 	return (line->str);
 }
