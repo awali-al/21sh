@@ -6,7 +6,7 @@
 /*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/19 15:16:22 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/02 01:28:25 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/02/04 19:34:52 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,8 @@
 
 typedef struct		s_line
 {
-	struct s_line	*prv;
-	struct s_line	*nxt;
 	char			*str;
+	char			*tmp;
 	int				curs;
 	int				buf;
 	int				col;
@@ -46,19 +45,15 @@ typedef struct		s_line
 	int				con;
 }					t_line;
 
+typedef struct		s_hist
+{
+	char			*cmd;
+	int				i;
+	struct s_hist	*prv;
+	struct s_hist	*nxt;
+}					t_hist;
+
 extern struct termios g_saved_attributes;
-
-int					to_putchar(int c);
-void				go_right(t_line **line);
-void				go_left(t_line **line);
-void				home(t_line *line);
-void				end(t_line *line);
-
-t_line				*duplic_history(t_line *bot);
-void				add_to_history(t_line **bot, t_line *line);
-void				clear_history(t_line **bot);
-t_line				*prv_line(t_line *line);
-t_line				*nxt_line(t_line *line);
 
 char				**my_envirenement(char **env);
 char				*value_of(char **env, char *key);
@@ -66,11 +61,17 @@ void				free_2d(char ***dar);
 int					term_set(void);
 int					display_prompt(int c);
 
+char				*get_line(t_hist *his, int prm);
 void				set_input_mode(void);
 void				reset_input_mode(void);
-char				*get_line(t_line **bot, int prm);
 void				put_in_pos(char *str);
-void				add_in_pos(t_line **line);
-void				del_in_pos(t_line **line);
+void				add_in_pos(t_line *line);
+void				del_in_pos(t_line *line);
+
+int					to_putchar(int c);
+void				go_right(t_line *line);
+void				go_left(t_line *line);
+void				home(t_line *line);
+void				end(t_line *line);
 
 #endif
