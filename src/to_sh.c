@@ -6,7 +6,7 @@
 /*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/19 15:15:48 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/04 19:35:27 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/02/05 19:55:57 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,3 +37,5 @@ int		main(int ac, char **av, char **ev)
 	ev ? free_2d(&ev) : 0;
 	return (0);
 }
+
+char	*read_line(char *prompt);

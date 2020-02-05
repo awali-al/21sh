@@ -6,7 +6,7 @@
 /*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/19 15:16:22 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/04 19:34:52 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/02/05 15:45:15 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,11 @@ typedef struct		s_line
 
 typedef struct		s_hist
 {
-	char			*cmd;
-	int				i;
 	struct s_hist	*prv;
 	struct s_hist	*nxt;
+	char			*cmd;
+	int				fd;
+	int				i;
 }					t_hist;
 
 extern struct termios g_saved_attributes;

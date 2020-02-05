@@ -6,7 +6,7 @@
 /*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 13:46:50 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/04 17:55:28 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/02/05 15:36:06 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static t_line	line_ini(int prm)
 	return (ret);
 }
 
-char			*get_line(int prm)
+char			*get_line(t_hist *his, int prm)
 {
 	t_line			line;
 
