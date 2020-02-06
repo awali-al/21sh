@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_line.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aminewalialami <aminewalialami@student.    +#+  +:+       +#+        */
+/*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 13:46:50 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/06 02:09:26 by aminewalial      ###   ########.fr       */
+/*   Updated: 2020/02/06 18:53:54 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static t_line	line_ini(int prm)
 	return (ret);
 }
 
-char			*get_line(t_hist *his, int prm)
+char			*get_line(t_hist **his, int prm)
 {
 	t_line			line;
 
@@ -77,10 +77,11 @@ char			*get_line(t_hist *his, int prm)
 			break ;
 		else
 		{
-			store_print(&his, &line);
+			store_print(his, &line);
 			line.con = qdq_con(line.buf, line.con);
 		}
 	}
 	reset_input_mode();
+	add_to_history(his, line.str);
 	return (line.str);
 }

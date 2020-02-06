@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   to_sh.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aminewalialami <aminewalialami@student.    +#+  +:+       +#+        */
+/*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/19 15:16:22 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/06 02:09:15 by aminewalial      ###   ########.fr       */
+/*   Updated: 2020/02/06 18:51:52 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ typedef struct		s_hist
 	struct s_hist	*prv;
 	struct s_hist	*nxt;
 	char			*cmd;
-	int				fd;
 	int				i;
 }					t_hist;
 
@@ -65,10 +64,10 @@ char				*value_of(char **env, char *key);
 int					term_set(void);
 int					display_prompt(int c);
 
-t_hist				*open_hist(int *fd);
-void				add_to_history(t_hist **his, char *line, int fd);
+t_hist				*open_hist(void);
+void				add_to_history(t_hist **his, char *line);
 
-char				*get_line(t_hist *his, int prm);
+char				*get_line(t_hist **his, int prm);
 void				set_input_mode(void);
 void				reset_input_mode(void);
 void				put_in_pos(char *str);

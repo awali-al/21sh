@@ -3,24 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   history.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aminewalialami <aminewalialami@student.    +#+  +:+       +#+        */
+/*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 19:33:04 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/06 02:17:06 by aminewalial      ###   ########.fr       */
+/*   Updated: 2020/02/06 20:51:46 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/to_sh.h"
 
-static t_hist	*new_node(char *str, int fd)
+static t_hist	*new_node(char *str)
 {
 	t_hist	*ret;
 
-	if (str)
+	if (str && *str)
 	{
 		ret = (t_hist*)malloc(sizeof(t_hist));
-		ret->cmd = str;
-		ret->fd = fd;
+		ret->cmd = ft_strdup(str);
 		ret->prv = NULL;
 		ret->nxt = NULL;
 		return (ret);
@@ -29,31 +28,38 @@ static t_hist	*new_node(char *str, int fd)
 		return (NULL);
 }
 
-static char	*line_index(int i)
+static void		file_save(t_hist *his, char *str)
 {
-	char	*ret;
+	char	*idx;
 	char	*tmp;
+	int		fd;
 
-	tmp = ft_itoa(i);
-	ret = char_join(tmp, ' ');
+	idx = ft_strjoin(getenv("HOME"), "/.history");
+	fd = open(idx, O_WRONLY | O_APPEND);
+	ft_strdel(&idx);
+	if (his)
+		tmp = ft_itoa(his->i + 1);
+	else
+		tmp = ft_itoa(1);
+	idx = char_join(tmp, ' ');
 	ft_strdel(&tmp);
-	return (ret);
+	tmp = ft_strjoin(idx, str);
+	ft_strdel(&idx);
+	idx = char_join(tmp, -1);
+	ft_strdel(&tmp);
+	write(fd, idx, ft_strlen(idx));
+	ft_strdel(&idx);
+	close(fd);
 }
 
-void		add_to_history(t_hist **his, char *line, int fd)
+void			add_to_history(t_hist **his, char *line)
 {
 	t_hist	*node;
-	char	*tmp;
-	char	*idx;
 
-	if (line)
+	if (line && line[0])
 	{
-		idx = *his ? line_index((*his)->i + 1) : line_index(1);
-		tmp = ft_strjoin(idx, line);
-		ft_strdel(&idx);
-		node = new_node(char_join(tmp, -1), fd);
-		ft_strdel(&tmp);
-		write(fd, node->cmd, ft_strlen(node->cmd));
+		file_save(*his, line);
+		node = new_node(line);
 		if (*his)
 		{
 			node->i = (*his)->i + 1;
@@ -62,48 +68,57 @@ void		add_to_history(t_hist **his, char *line, int fd)
 		}
 		else
 			node->i = 1;
-		node->nxt = NULL;
 		*his = node;
 	}
 }
 
-static char	*next_cmd(int fd)
+static char		*next_cmd(int fd)
 {
 	char	*ret;
 	char	*tmp;
 	char	buf[2];
+	int		rd;
 
-	ret = NULL;
+	ret = ft_strnew(1);
 	if (read(fd, buf, 0) == -1)
 		return (NULL);
-	while (read(fd, buf, 1) && buf[0] != -1)
+	while ((rd = read(fd, buf, 1)) && buf[0] != -1)
 	{
 		buf[1] = '\0';
 		tmp = ret;
 		ret = ft_strjoin(tmp, buf);
 		ft_strdel(&tmp);
 	}
+	if (!rd)
+		return (NULL);
 	return (ret);
 }
 
-t_hist		*open_hist(int *fd)
+t_hist			*open_hist(void)
 {
 	t_hist	*ret;
 	char	*str;
+	int		fd;
 
-	*fd = open("~/.history", O_RDWR | O_CREAT | O_APPEND, S_IRWXU);
-	printf("fd = %d\n", *fd);
-	str = next_cmd(*fd);
-	ret = new_node(str, *fd);
-	ret->i = ft_atoi(str);
+	str = ft_strjoin(getenv("HOME"), "/.history");
+	fd = open(str, O_RDONLY | O_CREAT, S_IRWXU);
 	ft_strdel(&str);
-	while (ret && (str = next_cmd(*fd)))
+	str = next_cmd(fd);
+	ret = NULL;
+	if (str && str[0])
 	{
-		ret->prv = new_node(str, *fd);
-		ret->prv->i = ft_atoi(str);
-		ret->prv->nxt = ret;
-		ret = ret->prv;
+		ret = new_node(ft_strchr(str, ' ') + 1);
+		ret ? ret->i = ft_atoi(str) : 0;
 		ft_strdel(&str);
+		while (ret && (str = next_cmd(fd)))
+		{
+			ret->nxt = new_node(ft_strchr(str, ' ') + 1);
+			ret->nxt->i = ft_atoi(str);
+			ret->nxt->prv = ret;
+			ret = ret->nxt;
+			ft_strdel(&str);
+		}
 	}
+	close(fd);
 	return (ret);
 }
