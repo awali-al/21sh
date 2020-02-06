@@ -1,50 +1,50 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   envirenement.c                                     :+:      :+:    :+:   */
+/*   extra.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aminewalialami <aminewalialami@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/30 11:06:42 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/05 23:37:11 by aminewalial      ###   ########.fr       */
+/*   Created: 2020/02/05 23:34:31 by aminewalial       #+#    #+#             */
+/*   Updated: 2020/02/06 01:27:44 by aminewalial      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/to_sh.h"
 
-char		*value_of(char **env, char *key)
+char	*char_join(char *str, int c)
 {
 	char	*ret;
-	char	*tmp;
 	int		i;
 
+	ret = ft_strnew(ft_strlen(str) + 1);
 	i = 0;
-	ret = NULL;
-	tmp = ft_strjoin(key, "=");
-	while (env[i] && ft_strstr(env[i], tmp) != env[i])
+	while (str[i])
+	{
+		ret[i] = str[i];
 		i++;
-	ft_strdel(&tmp);
-	if (env[i])
-		ret = ft_strchr(env[i], '=') + 1;
+	}
+	ret[i] = c;
 	return (ret);
 }
 
-char		**my_envirenement(char **env)
+int		to_putchar(int c)
 {
-	char	**ret;
-	int		n;
+	write(1, &c, 1);
+	return (0);
+}
+
+void	free_2d(char ***dar)
+{
 	int		i;
 
 	i = 0;
-	n = 0;
-	while (env[n])
-		n++;
-	ret = (char**)malloc((n + 1) * sizeof(char*));
-	while (i < n)
-	{
-		ret[i] = ft_strdup(env[i]);
-		i++;
-	}
-	ret[i] = NULL;
-	return (ret);
+	if (dar)
+		while ((*dar)[i])
+		{
+			ft_strdel(&(*dar)[i]);
+			i++;
+		}
+	free(*dar);
+	*dar = NULL;
 }

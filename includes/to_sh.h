@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   to_sh.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aminewalialami <aminewalialami@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/19 15:16:22 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/05 15:45:15 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/02/06 02:09:15 by aminewalial      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,17 @@ typedef struct		s_hist
 
 extern struct termios g_saved_attributes;
 
+char				*char_join(char *str, int c);
+int					to_putchar(int c);
+void				free_2d(char ***dar);
+
 char				**my_envirenement(char **env);
 char				*value_of(char **env, char *key);
-void				free_2d(char ***dar);
 int					term_set(void);
 int					display_prompt(int c);
+
+t_hist				*open_hist(int *fd);
+void				add_to_history(t_hist **his, char *line, int fd);
 
 char				*get_line(t_hist *his, int prm);
 void				set_input_mode(void);
@@ -69,7 +75,9 @@ void				put_in_pos(char *str);
 void				add_in_pos(t_line *line);
 void				del_in_pos(t_line *line);
 
-int					to_putchar(int c);
+void				prev_line(t_hist **his, t_line *line);
+void				next_line(t_hist **his, t_line *line);
+
 void				go_right(t_line *line);
 void				go_left(t_line *line);
 void				home(t_line *line);

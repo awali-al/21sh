@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   to_sh.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aminewalialami <aminewalialami@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/19 15:15:48 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/05 19:55:57 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/02/06 02:09:07 by aminewalial      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int		main(int ac, char **av, char **ev)
 			ft_strdel(&line);
 			prm = display_prompt(ac);
 			line = get_line(his, prm);
+			add_to_history(&his, line, fd);
 			write(1, "\n", 1);
 		}
 	close(fd);

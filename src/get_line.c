@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_line.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aminewalialami <aminewalialami@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 13:46:50 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/05 15:36:06 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/02/06 02:09:26 by aminewalial      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int		qdq_con(int b, int c)
 		return (0);
 }
 
-static void		store_print(t_line *line)
+static void		store_print(t_hist **his, t_line *line)
 {
 	if (ft_isprint(line->buf))
 		add_in_pos(line);
@@ -41,6 +41,10 @@ static void		store_print(t_line *line)
 		go_right(line);
 	else if (line->buf == LEFT && line->curs)
 		go_left(line);
+	else if (line->buf == UP)
+		prev_line(his, line);
+	else if (line->buf == DOWN)
+		next_line(his, line);
 }
 
 static t_line	line_ini(int prm)
@@ -73,7 +77,7 @@ char			*get_line(t_hist *his, int prm)
 			break ;
 		else
 		{
-			store_print(&line);
+			store_print(&his, &line);
 			line.con = qdq_con(line.buf, line.con);
 		}
 	}

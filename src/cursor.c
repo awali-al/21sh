@@ -3,20 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cursor.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aminewalialami <aminewalialami@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 17:41:17 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/04 17:54:36 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/02/06 01:27:34 by aminewalial      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/to_sh.h"
-
-int		to_putchar(int c)
-{
-	write(1, &c, 1);
-	return (0);
-}
 
 int		curow(void)
 {
