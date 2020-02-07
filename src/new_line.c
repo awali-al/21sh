@@ -6,39 +6,46 @@
 /*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/01 16:52:14 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/01 19:38:36 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/02/07 22:44:15 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/to_sh.h"
 
-static int	pri_pro(t_line *line)
+static void	nxt_line_curs(t_line line)
 {
-	if (line->con = '|')
-	{
-		ft_putstr("pipe> ");
-		return (6);
-	}
-	else if (line->con == '\'')
-	{
-		ft_putstr("quote> ");
-		return (7);
-	}
-	else if (line->con = '\"')
-	{
-		ft_putstr("dquote> ");
-		return (8);
-	}
+	if (curow() != line.row)
+		tputs(tgetstr("do", NULL), 1, to_putchar);
+	tputs(tgetstr("cr", NULL), 1, to_putchar);
 }
 
 void		new_line(t_line *line)
 {
 	char	*tmp;
+	int		i;
 
-	add_in_pos(line);
 	tmp = line->cmd;
 	line->cmd = ft_strjoin(tmp, line->str);
+	line->cmd = char_join(line->cmd, '\n');
 	ft_strdel(&tmp);
 	ft_strdel(&line->str);
-	line->prm = pri_pro(line);
+	line->str = ft_strnew(1);
+	nxt_line_curs(*line);
+	if (line->con == '\'')
+	{
+		put_in_pos("quote> ");
+		line->prm = 7;
+	}
+	else
+	{
+		put_in_pos("dquote> ");
+		line->prm = 8;
+	}
+	i = 0;
+	while (i < line->prm)
+	{
+		go_right(line);
+		i++;
+	}
+	line->curs = 0;
 }

@@ -6,7 +6,7 @@
 /*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 01:29:39 by aminewalial       #+#    #+#             */
-/*   Updated: 2020/02/06 19:25:23 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/02/07 23:13:19 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	prev_line(t_hist **his, t_line *line)
 {
 	if (*his)
 	{
-		// printf("salam\n");
 		home(line);
 		if (!line->tmp)
 			line->tmp = line->str;

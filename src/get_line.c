@@ -6,7 +6,7 @@
 /*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 13:46:50 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/06 18:53:54 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/02/07 22:42:48 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ static void		store_print(t_hist **his, t_line *line)
 		prev_line(his, line);
 	else if (line->buf == DOWN)
 		next_line(his, line);
+	else if (line->buf == '\n')
+		new_line(line);
 }
 
 static t_line	line_ini(int prm)
@@ -53,6 +55,7 @@ static t_line	line_ini(int prm)
 	t_line			ret;
 
 	ioctl(0, TIOCGWINSZ, &ws);
+	ret.cmd = ft_strnew(1);
 	ret.str = ft_strnew(1);
 	ret.tmp = NULL;
 	ret.col = ws.ws_col;
@@ -66,6 +69,7 @@ static t_line	line_ini(int prm)
 char			*get_line(t_hist **his, int prm)
 {
 	t_line			line;
+	char			*ret;
 
 	set_input_mode();
 	line = line_ini(prm);
@@ -81,7 +85,8 @@ char			*get_line(t_hist **his, int prm)
 			line.con = qdq_con(line.buf, line.con);
 		}
 	}
+	ret = ft_strjoin(line.cmd, line.str);
 	reset_input_mode();
-	add_to_history(his, line.str);
-	return (line.str);
+	add_to_history(his, ret);
+	return (ret);
 }

@@ -6,7 +6,7 @@
 /*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/19 15:16:22 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/06 18:51:52 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/02/07 22:19:03 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@
 
 typedef struct		s_line
 {
+	char			*cmd;
 	char			*str;
 	char			*tmp;
 	int				curs;
@@ -77,6 +78,9 @@ void				del_in_pos(t_line *line);
 void				prev_line(t_hist **his, t_line *line);
 void				next_line(t_hist **his, t_line *line);
 
+void				new_line(t_line *line);
+
+int					curow(void);
 void				go_right(t_line *line);
 void				go_left(t_line *line);
 void				home(t_line *line);
