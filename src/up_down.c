@@ -6,7 +6,7 @@
 /*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 01:29:39 by aminewalial       #+#    #+#             */
-/*   Updated: 2020/02/07 23:13:19 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/02/09 00:43:21 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	next_line(t_hist **his, t_line *line)
 {
 	if (line->tmp)
 	{
+		home(line);
 		if ((*his)->nxt)
 		{
 			*his = (*his)->nxt;
@@ -41,7 +42,6 @@ void	next_line(t_hist **his, t_line *line)
 			line->str = line->tmp;
 			line->tmp = NULL;
 		}
-		home(line);
 		put_in_pos(line->str);
 		end(line);
 	}

@@ -6,7 +6,7 @@
 #    By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/05 14:26:42 by aminewalial       #+#    #+#              #
-#    Updated: 2020/02/07 22:13:56 by awali-al         ###   ########.fr        #
+#    Updated: 2020/02/09 21:24:53 by awali-al         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ SRC_DIR = src
 
 SRC_FILES =  to_sh.c envirenement.c display.c get_line.c term_set.c \
 edit_in_pos.c cursor.c navigation.c extra.c up_down.c history.c \
-new_line.c
+new_line.c curmove.c curmove_2.c
 
 SRC = $(addprefix $(SRC_DIR)/, SRC_FILES)
 

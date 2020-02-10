@@ -3,57 +3,87 @@
 /*                                                        :::      ::::::::   */
 /*   cursor.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aminewalialami <aminewalialami@student.    +#+  +:+       +#+        */
+/*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 17:41:17 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/06 01:27:34 by aminewalial      ###   ########.fr       */
+/*   Updated: 2020/02/10 01:30:18 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/to_sh.h"
 
-int		curow(void)
+static int	nxt_end(char *str)
 {
-	char	**arr;
-	char	buf[5];
-	int		ret;
+	char	*l;
 
-	write(1, "\033[6n", 4);
-	read(0, &buf, 4);
-	buf[4] = '\0';
-	arr = ft_strsplit(buf, ';');
-	ret = ft_atoi(arr[0]);
-	free_2d(&arr);
-	return (ret);
+	if ((l = ft_strchr(str, '\n')))
+		return (l - str);
+	else
+		return (ft_strlen(str));
 }
 
-void	go_right(t_line *line)
+static int	prv_end(t_line *line)
+{
+	int		c;
+	int		i;
+
+	c = 0;
+	i = line->idx - 1;
+	i--;
+	while (i >= 0 && line->str[i] != '\n')
+	{
+		i--;
+		c++;
+	}
+	if (i)
+		return (c % line->col);
+	else
+		return ((c + line->prm));
+}
+
+void		go_right(t_line *line)
 {
 	int		l;
 
-	l = ft_strlen(line->str) + line->prm;
-	line->curs++;
-	if ((line->curs + line->prm) % line->col == 0)
+	line->idx++;
+	l = nxt_end(line->str + line->idx);
+	if (line->row == line->cupo.row)
 	{
-		if (line->row != curow())
-			tputs(tgetstr("do", NULL), 1, to_putchar);
-		else if (line->row != curow() && line->curs != l
-				&& l % line->col == 0)
-			tputs(tgetstr("up", NULL), 1, to_putchar);
-		tputs(tgetstr("cr", NULL), 1, to_putchar);
+		if (line->cupo.col == line->col || line->str[line->idx] == '\n')
+			cur_begl(line);
+		else if (l)
+		{
+			cur_rght(line);
+			if ((l + line->cupo.col) == line->col)
+				cur_upln(line);
+		}
 	}
 	else
-		tputs(tgetstr("nd", NULL), 1, to_putchar);
+	{
+		if (line->cupo.col == line->col || line->str[line->idx] == '\n')
+		{
+			cur_begl(line);
+			cur_down(line);
+		}
+		else
+			cur_rght(line);
+	}
 }
 
-void	go_left(t_line *line)
+void		go_left(t_line *line)
 {
-	if (((line->curs + line->prm) % line->col) == 0)
+	if (line->cupo.col % line->col == 0)
 	{
-		tputs(tgetstr("up", NULL), 1, to_putchar);
-		tputs(tgoto(tgetstr("ch", NULL), 0, line->col - 1), 1, to_putchar);
+		cur_upln(line);
+		cur_endl(line);
+	}
+	else if ((line->idx > 0 && line->str[line->idx] == '\n'))
+	{
+		cur_upln(line);
+		line->cupo.col = prv_end(line);
+		tputs(tgoto(tgetstr("ch", NULL), 0, line->cupo.col), 1, to_putchar);
 	}
 	else
-		tputs(tgetstr("le", NULL), 1, to_putchar);
-	line->curs--;
+		cur_left(line);
+	line->idx--;
 }
