@@ -6,54 +6,75 @@
 /*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 17:41:17 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/08 23:39:03 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/02/13 18:15:18 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/to_sh.h"
 
-int		curow(void)
+static int	nxt_end(t_line *line)
 {
-	char	**arr;
-	char	buf[5];
-	int		ret;
+	char	*n;
 
-	write(1, "\033[6n", 4);
-	read(0, &buf, 4);
-	buf[4] = '\0';
-	arr = ft_strsplit(buf, ';');
-	ret = ft_atoi(arr[0]);
-	free_2d(&arr);
-	return (ret);
+	n = ft_strchr(line->str + line->idx, '\n');
+	if (n)
+		return (n - (line->str + line->idx));
+	else
+		return (ft_strlen(line->str + line->idx));
 }
 
-void	go_right(t_line *line)
+void		go_right(t_line *line)
 {
 	int		l;
 
-	l = ft_strlen(line->str) + line->prm;
-	line->curs++;
-	if ((line->curs + line->prm) % line->col == 0)
+	line->idx++;
+	if (line->str[line->idx] == '\n' || line->col == line->curp.col)
 	{
-		if (line->row != curow())
-			tputs(tgetstr("do", NULL), 1, to_putchar);
-		else if (line->row != curow() && line->curs != l
-				&& l % line->col == 0)
-			tputs(tgetstr("up", NULL), 1, to_putchar);
-		tputs(tgetstr("cr", NULL), 1, to_putchar);
+		cur_down(line);
+		cur_begn(line);
 	}
+	else if (line->row != line->curp.row)
+		cur_rght(line);
 	else
-		tputs(tgetstr("nd", NULL), 1, to_putchar);
+	{
+		cur_rght(line);
+		if ((l = nxt_end(line)) && (line->curp.col + l) == line->col + 2)
+		{
+			tputs(tgetstr("sc", NULL), 1, to_putchar);
+			tputs(tgetstr("do", NULL), 1, to_putchar);
+			tputs(tgetstr("rc", NULL), 1, to_putchar);
+		}
+	}
 }
 
-void	go_left(t_line *line)
+static int	prv_end(t_line *line)
 {
-	if (((line->curs + line->prm) % line->col) == 0)
-	{
-		tputs(tgetstr("up", NULL), 1, to_putchar);
-		tputs(tgoto(tgetstr("ch", NULL), 0, line->col - 1), 1, to_putchar);
-	}
+	int		n;
+
+	n = 0;
+	n = line->idx - 2;
+	while (n >= 0 && line->str[n] != '\n')
+		n--;
+	if (n < 0)
+		n = line->prm;
+	else if (!n)
+		n += line->prm;
+	return (n % line->col + 1);
+	return (0);
+}
+
+void		go_left(t_line *line)
+{
+	if (line->curp.col > 1)
+		cur_left(line);
 	else
-		tputs(tgetstr("le", NULL), 1, to_putchar);
-	line->curs--;
+	{
+		cur_upln(line);
+		if (line->str[line->idx - 1] == '\n')
+			line->curp.col = prv_end(line);
+		else
+			line->curp.col = line->col - 1;
+		tputs(tgoto(tgetstr("ch", NULL), 0, line->curp.col), 1, to_putchar);
+	}
+	line->idx--;
 }

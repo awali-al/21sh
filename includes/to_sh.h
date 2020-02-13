@@ -6,7 +6,7 @@
 /*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/19 15:16:22 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/08 21:50:42 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/02/13 18:16:22 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,24 +33,26 @@
 # define END		4610843
 # define BACKSPACE	127
 
-typedef struct		s_line
-{
-	char			*cmd;
-	char			*str;
-	char			*tmp;
-	int				curs;
-	int				buf;
-	int				col;
-	int				row;
-	int				prm;
-	int				con;
-}					t_line;
-
 typedef struct		s_pos
 {
 	int				row;
 	int				col;
 }					t_pos;
+
+typedef struct		s_line
+{
+	t_pos			curp;
+	char			*cmd;
+	char			*str;
+	char			*tmp;
+	int				idx;
+	int				buf;
+	int				col;
+	int				row;
+	int				prm;
+	int				con;
+	int				fdtty;
+}					t_line;
 
 typedef struct		s_hist
 {
@@ -86,7 +88,12 @@ void				next_line(t_hist **his, t_line *line);
 
 void				new_line(t_line *line);
 
-int					curow(void);
+void				cur_begn(t_line *line);
+void				cur_rght(t_line *line);
+void				cur_left(t_line *line);
+void				cur_upln(t_line *line);
+void				cur_down(t_line *line);
+
 void				go_right(t_line *line);
 void				go_left(t_line *line);
 void				home(t_line *line);

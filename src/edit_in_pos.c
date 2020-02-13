@@ -6,7 +6,7 @@
 /*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 19:56:41 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/07 22:58:27 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/02/10 20:02:25 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	add_in_pos(t_line *line)
 
 	i = 0;
 	tmp = ft_strnew(ft_strlen(line->str) + 1);
-	while (i < (size_t)line->curs)
+	while (i < (size_t)line->idx)
 	{
 		tmp[i] = line->str[i];
 		i++;
@@ -41,7 +41,7 @@ void	add_in_pos(t_line *line)
 	}
 	ft_strdel(&(line->str));
 	line->str = tmp;
-	put_in_pos(line->str + line->curs);
+	put_in_pos(line->str + line->idx);
 	go_right(line);
 }
 
@@ -57,7 +57,7 @@ void	del_in_pos(t_line *line)
 	tmp = ft_strnew(ft_strlen(line->str) - 1);
 	while (line->str[i])
 	{
-		if (i != line->curs)
+		if (i != line->idx)
 		{
 			tmp[j] = line->str[i];
 			j++;
@@ -66,5 +66,5 @@ void	del_in_pos(t_line *line)
 	}
 	ft_strdel(&(line->str));
 	line->str = tmp;
-	put_in_pos(line->str + line->curs);
+	put_in_pos(line->str + line->idx);
 }

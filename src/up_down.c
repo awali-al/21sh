@@ -6,7 +6,7 @@
 /*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 01:29:39 by aminewalial       #+#    #+#             */
-/*   Updated: 2020/02/08 20:26:51 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/02/13 18:36:25 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	prev_line(t_hist **his, t_line *line)
 	if (*his)
 	{
 		home(line);
+		dprintf(line->fdtty, "going home cc: %d wc: %d cr: %d wr: %d hc: %d hr: %d\n", line->curp.col, line->col, line->curp.row, line->row);
 		if (!line->tmp)
 			line->tmp = line->str;
 		else if ((*his)->prv)
@@ -24,6 +25,7 @@ void	prev_line(t_hist **his, t_line *line)
 		line->str = (*his)->cmd;
 		put_in_pos(line->str);
 		end(line);
+		dprintf(line->fdtty, "Icc: %d wc: %d cr: %d wr: %d hc: %d hr: %d\n", line->curp.col, line->col, line->curp.row, line->row);
 	}
 }
 
