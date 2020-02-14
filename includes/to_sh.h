@@ -6,7 +6,7 @@
 /*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/19 15:16:22 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/13 18:16:22 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/02/14 19:50:56 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@
 # define RED_COL	"\x1b[31m"
 # define GREEN_COL	"\x1B[32m"
 # define RESET_COL	"\x1b[37m"
-# define CLR_SCRN	"\033[2J"
 
 # define UP			4283163
 # define DOWN		4348699

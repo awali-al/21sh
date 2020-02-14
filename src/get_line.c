@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_line.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aminewalialami <aminewalialami@student.    +#+  +:+       +#+        */
+/*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 13:46:50 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/14 15:26:32 by aminewalial      ###   ########.fr       */
+/*   Updated: 2020/02/14 21:21:23 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ char			*get_line(t_hist **his, int prm)
 	while (1)
 	{
 		line.buf = 0;
-		dprintf(line.fdtty, "cc: %d wc: %d cr: %d wr: %d\n", line.curp.col, line.col, line.curp.row, line.row);
+		// dprintf(line.fdtty, "cc: %d wc: %d cr: %d wr: %d\n", line.curp.col, line.col, line.curp.row, line.row);
 		read(0, &line.buf, 4);
 		if (condition(line.buf, line.con))
 			break ;

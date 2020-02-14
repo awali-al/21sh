@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cursor.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aminewalialami <aminewalialami@student.    +#+  +:+       +#+        */
+/*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 17:41:17 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/14 16:12:42 by aminewalial      ###   ########.fr       */
+/*   Updated: 2020/02/14 21:41:51 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void		go_right(t_line *line)
 {
 	int		l;
 
-	line->idx++;
 	if (line->str[line->idx] == '\n' || line->col == line->curp.col)
 	{
 		cur_down(line);
@@ -45,24 +44,26 @@ void		go_right(t_line *line)
 			tputs(tgetstr("rc", NULL), 1, to_putchar);
 		}
 	}
+	line->idx++;
 }
 
 static int	prv_end(t_line *line)
 {
 	int		n;
+	int		i;
 
-	n = line->idx - 1;
-	while (n >= 0 && line->str[n] != '\n')
-		n--;
-	if (n <= 0)
-		n = line->prm;
-	else if (n == 1)
-		n += line->prm + 1;
+	i = line->idx - 1;
+	while (i >= 0 && line->str[i] != '\n')
+		i--;
+	n = line->idx - i;
+	if (i < 0)
+		n += line->prm;
 	return (n % line->col);
 }
 
 void		go_left(t_line *line)
 {
+	line->idx--;
 	if (line->curp.col > 1)
 		cur_left(line);
 	else
@@ -73,7 +74,6 @@ void		go_left(t_line *line)
 			line->curp.col = prv_end(line);
 		else
 			line->curp.col = line->col - 1;
-		tputs(tgoto(tgetstr("ch", NULL), 0, line->curp.col), 1, to_putchar);
+		tputs(tgoto(tgetstr("ch", NULL), 0, line->curp.col - 1), 1, to_putchar);
 	}
-	line->idx--;
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   navigation.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aminewalialami <aminewalialami@student.    +#+  +:+       +#+        */
+/*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/01 17:36:49 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/14 16:11:23 by aminewalial      ###   ########.fr       */
+/*   Updated: 2020/02/14 21:42:00 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,9 @@ void	home(t_line *line)
 {
 	while (line->idx)
 	{
-		go_left(line);
+		dprintf(line->fdtty, "pchar: %c idx: %d cc: %d\n",line->str[line->idx - 1], line->idx, line->curp.col);
 		sleep(1);
+		go_left(line);
 	}
 }
 
