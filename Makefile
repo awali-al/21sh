@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+         #
+#    By: aminewalialami <aminewalialami@student.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/05 14:26:42 by aminewalial       #+#    #+#              #
-#    Updated: 2020/02/10 22:52:44 by awali-al         ###   ########.fr        #
+#    Updated: 2020/02/14 15:17:57 by aminewalial      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,6 @@ all : $(NAME)
 $(NAME) : $(OBJ) $(HEADER)
 	make -C libft/
 	gcc $(FLAGS) -I $(HEADER) $(OBJ) $(LIB) -o $(NAME) -ltermcap
-	# clear
 
 $(OBJ) : $(OBJ_DIR)/%.o : $(SRC_DIR)/%.c | $(OBJ_DIR)
 	gcc $(FLAGS) -c $< -I $(HEADER) -o $@

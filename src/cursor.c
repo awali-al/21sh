@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cursor.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aminewalialami <aminewalialami@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 17:41:17 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/13 18:15:18 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/02/14 16:12:42 by aminewalial      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,16 +51,14 @@ static int	prv_end(t_line *line)
 {
 	int		n;
 
-	n = 0;
-	n = line->idx - 2;
+	n = line->idx - 1;
 	while (n >= 0 && line->str[n] != '\n')
 		n--;
-	if (n < 0)
+	if (n <= 0)
 		n = line->prm;
-	else if (!n)
-		n += line->prm;
-	return (n % line->col + 1);
-	return (0);
+	else if (n == 1)
+		n += line->prm + 1;
+	return (n % line->col);
 }
 
 void		go_left(t_line *line)
@@ -69,8 +67,9 @@ void		go_left(t_line *line)
 		cur_left(line);
 	else
 	{
+		dprintf(line->fdtty, "'%c'\n", line->str[line->idx]);
 		cur_upln(line);
-		if (line->str[line->idx - 1] == '\n')
+		if (line->str[line->idx] == '\n')
 			line->curp.col = prv_end(line);
 		else
 			line->curp.col = line->col - 1;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   navigation.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aminewalialami <aminewalialami@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/01 17:36:49 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/12 22:08:53 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/02/14 16:11:23 by aminewalial      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,18 @@
 
 void	home(t_line *line)
 {
-	int		i;
-
-	i = line->idx;
-	while (i >= 0)
+	while (line->idx)
 	{
 		go_left(line);
-		i--;
+		sleep(1);
 	}
 }
 
 void	end(t_line *line)
 {
 	int		n;
-	int		i;
 
-	i = 0;
 	n = ft_strlen(line->str);
-	while (i < n)
-	{
+	while (line->idx < n)
 		go_right(line);
-		i++;
-	}
 }
