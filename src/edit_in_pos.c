@@ -6,19 +6,11 @@
 /*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 19:56:41 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/10 20:02:25 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/02/15 23:20:16 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/to_sh.h"
-
-void	put_in_pos(char *str)
-{
-	tputs(tgetstr("sc", NULL), 1, to_putchar);
-	tputs(tgetstr("cd", NULL), 1, to_putchar);
-	ft_putstr(str);
-	tputs(tgetstr("rc", NULL), 1, to_putchar);
-}
 
 void	add_in_pos(t_line *line)
 {
@@ -67,4 +59,15 @@ void	del_in_pos(t_line *line)
 	ft_strdel(&(line->str));
 	line->str = tmp;
 	put_in_pos(line->str + line->idx);
+}
+
+int		edit_in_pos(t_line *line)
+{
+	if (ft_isprint(line->buf))
+		add_in_pos(line);
+	else if (line->buf == BACKSPACE && line->idx)
+		del_in_pos(line);
+	else
+		return (0);
+	return (1);
 }

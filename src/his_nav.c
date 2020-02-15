@@ -1,24 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   up_down.c                                          :+:      :+:    :+:   */
+/*   his_nav.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 01:29:39 by aminewalial       #+#    #+#             */
-/*   Updated: 2020/02/14 21:22:03 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/02/15 23:29:59 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/to_sh.h"
 
-void	prev_line(t_hist **his, t_line *line)
+static void	prev_line(t_hist **his, t_line *line)
 {
 	if (*his)
 	{
-		// dprintf(line->fdtty, "idx: %d cc: %d\n", line->idx, line->curp.col);
 		home(line);
-		// dprintf(line->fdtty, "idx: %d cc: %d\n", line->idx, line->curp.col);
 		if (!line->tmp)
 			line->tmp = line->str;
 		else if ((*his)->prv)
@@ -29,7 +27,7 @@ void	prev_line(t_hist **his, t_line *line)
 	}
 }
 
-void	next_line(t_hist **his, t_line *line)
+static void	next_line(t_hist **his, t_line *line)
 {
 	if (line->tmp)
 	{
@@ -47,4 +45,15 @@ void	next_line(t_hist **his, t_line *line)
 		put_in_pos(line->str);
 		end(line);
 	}
+}
+
+int			his_nav(t_hist **his, t_line *line)
+{
+	if (line->buf == UPAR)
+		prev_line(his, line);
+	else if (line->buf == DOWN)
+		next_line(his, line);
+	else
+		return (0);
+	return (1);
 }

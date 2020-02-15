@@ -6,7 +6,7 @@
 /*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/05 23:34:31 by aminewalial       #+#    #+#             */
-/*   Updated: 2020/02/06 20:23:23 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/02/15 20:16:24 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,11 @@ void	free_2d(char ***dar)
 		}
 	free(*dar);
 	*dar = NULL;
+}
+
+int		is_ws(char c)
+{
+	if ((c >= 9 && c <= 13) || c == ' ')
+		return (1);
+	return (0);
 }
