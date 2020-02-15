@@ -6,7 +6,7 @@
 /*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 13:46:50 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/14 21:21:23 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/02/15 01:30:02 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,26 +30,27 @@ static int		qdq_con(int b, int c)
 		return (0);
 }
 
-static void		store_print(t_hist **his, t_line *line)
+/*static void		store_print(t_hist **his, t_line *line)
 {
 	if (ft_isprint(line->buf))
 		add_in_pos(line);
 	else if (line->buf == BACKSPACE && line->idx)
 		del_in_pos(line);
-	else if (line->buf == RIGHT &&
-			line->idx < (int)ft_strlen(line->str))
+	else if (line->buf == RGHT && line->idx < (int)ft_strlen(line->str))
 		go_right(line);
 	else if (line->buf == LEFT && line->idx)
 		go_left(line);
 	else if (line->buf == HOME)
 		home(line);
-	else if (line->buf == UP)
+	else if (line->buf == END)
+		end(line);
+	else if (line->buf == UPAR)
 		prev_line(his, line);
 	else if (line->buf == DOWN)
 		next_line(his, line);
 	else if (line->buf == '\n')
 		new_line(line);
-}
+}*/
 
 static t_line	line_ini(int prm)
 {
@@ -87,12 +88,13 @@ char			*get_line(t_hist **his, int prm)
 	{
 		line.buf = 0;
 		// dprintf(line.fdtty, "cc: %d wc: %d cr: %d wr: %d\n", line.curp.col, line.col, line.curp.row, line.row);
-		read(0, &line.buf, 4);
+		read(0, &line.buf, 12);
 		if (condition(line.buf, line.con))
 			break ;
 		else
 		{
-			store_print(his, &line);
+			printf("%d\n", line.buf);
+			// store_print(his, &line);
 			line.con = qdq_con(line.buf, line.con);
 		}
 	}

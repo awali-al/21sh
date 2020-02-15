@@ -6,7 +6,7 @@
 /*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/19 15:16:22 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/14 19:50:56 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/02/15 02:14:20 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,22 @@
 # define GREEN_COL	"\x1B[32m"
 # define RESET_COL	"\x1b[37m"
 
-# define UP			4283163
-# define DOWN		4348699
-# define LEFT		4479771
-# define RIGHT		4414235
 # define HOME		4741915
 # define END		4610843
+
+# define UP			4283163
+# define DOWN		4348699
+
+# define LEFT		4479771
+# define RIGHT		4414235
+
+# define ALT_RGHT	25115
+# define ALT_LEFT	26139
+
+# define CPY		42947
+# define CUT		8948194
+# define PST		10127586
+
 # define BACKSPACE	127
 
 typedef struct		s_pos
