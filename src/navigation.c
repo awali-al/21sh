@@ -6,7 +6,7 @@
 /*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/01 17:36:49 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/15 23:14:21 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/02/16 01:28:45 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,7 @@ void		home(t_line *line)
 
 void		end(t_line *line)
 {
-	int		n;
-
-	n = ft_strlen(line->str);
-	while (line->idx < n)
+	while (line->str[line->idx])
 		go_right(line);
 }
 
@@ -37,12 +34,9 @@ static void	prv_word(t_line *line)
 
 static void	nxt_word(t_line *line)
 {
-	int		n;
-
-	n = ft_strlen(line->str);
-	while (line->idx < n && is_ws(line->str[line->idx]))
+	while (line->str[line->idx] && is_ws(line->str[line->idx]))
 		go_right(line);
-	while (line->idx < n && !is_ws(line->str[line->idx]))
+	while (line->str[line->idx] && !is_ws(line->str[line->idx]))
 		go_right(line);
 }
 

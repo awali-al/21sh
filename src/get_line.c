@@ -6,7 +6,7 @@
 /*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 13:46:50 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/15 23:26:55 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/02/16 01:35:37 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,11 @@ static int		store_print(t_hist **his, t_line *line)
 	else if (his_nav(his, line))
 		return (1);
 	else if (line->buf == '\n')
+	{
 		new_line(line);
+		return (1);
+	}
+	
 	return (0);
 }
 
@@ -86,6 +90,7 @@ char			*get_line(t_hist **his, int prm)
 		else
 		{
 			store_print(his, &line);
+			dprintf(line.fdtty, "%d %d\n", line.idx, line.col);
 			line.con = qdq_con(line.buf, line.con);
 		}
 	}

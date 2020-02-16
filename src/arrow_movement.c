@@ -6,7 +6,7 @@
 /*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 17:41:17 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/16 00:25:43 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/02/16 01:44:25 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,41 +54,21 @@ void		go_left(t_line *line)
 
 static void	go_up(t_line *line)
 {
-	int		n;
 	int		i;
 
-	i = line->idx - 1;
-	n = 0;
-	while (i && line->str[i] != '\n')
-	{
-		n++;
-		i--;
-	}
-	if (!i)
-		home(line);
-	else
-	{
-		if (n > line->col)
-			n = line->col - 1;
-		i = 0;
-		while (i++ <= n && line->idx)
-			go_left(line);
-	}
+	i = 1;
+	while (line->idx && i++ < line->col && line->str[line->idx] != '\n')
+		go_left(line);
 }
 
 static void	go_down(t_line *line)
 {
-	int		n;
 	int		i;
 
-	if ((n = nxt_end(line)) > line->col)
-		n = line->col - 1;
 	i = 0;
-	while (i <= n)
-	{
+	while (line->str[line->idx] && line->str[line->idx] != '\n' &&
+			i++ < line->col)
 		go_right(line);
-		i++;
-	}
 }
 
 int			arrow_movement(t_line *line)
