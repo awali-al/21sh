@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   arrow_movement.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aminewalialami <aminewalialami@student.    +#+  +:+       +#+        */
+/*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 17:41:17 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/16 03:17:26 by aminewalial      ###   ########.fr       */
+/*   Updated: 2020/02/16 15:57:49 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void		go_left(t_line *line)
 			line->curp.col = prv_end(line);
 		else
 			line->curp.col = line->col;
-		tputs(tgoto(tgetstr("ch", NULL), 0, line->curp.col), 1, to_putchar);
+		tputs(tgoto(tgetstr("ch", NULL), 0, line->curp.col - 1), 1, to_putchar);
 	}
 }
 

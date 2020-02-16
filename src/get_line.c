@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_line.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aminewalialami <aminewalialami@student.    +#+  +:+       +#+        */
+/*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 13:46:50 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/16 03:06:54 by aminewalial      ###   ########.fr       */
+/*   Updated: 2020/02/16 14:22:43 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ static int		store_print(t_hist **his, t_line *line)
 		new_line(line);
 		return (1);
 	}
-	
 	return (0);
 }
 
