@@ -6,7 +6,7 @@
 /*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 17:41:17 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/15 23:16:23 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/02/16 00:25:43 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ void		go_left(t_line *line)
 		cur_left(line);
 	else
 	{
-		dprintf(line->fdtty, "'%c'\n", line->str[line->idx]);
 		cur_upln(line);
 		if (line->str[line->idx] == '\n')
 			line->curp.col = prv_end(line);
@@ -70,9 +69,9 @@ static void	go_up(t_line *line)
 	else
 	{
 		if (n > line->col)
-			n = line->col;
+			n = line->col - 1;
 		i = 0;
-		while (i++ < n)
+		while (i++ <= n && line->idx)
 			go_left(line);
 	}
 }
@@ -82,12 +81,10 @@ static void	go_down(t_line *line)
 	int		n;
 	int		i;
 
-	if (nxt_end(line) > line->col)
-		n = line->col;
-	else
-		n = ft_strlen(line->str);
+	if ((n = nxt_end(line)) > line->col)
+		n = line->col - 1;
 	i = 0;
-	while (i < n)
+	while (i <= n)
 	{
 		go_right(line);
 		i++;
