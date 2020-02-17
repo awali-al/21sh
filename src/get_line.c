@@ -6,29 +6,11 @@
 /*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 13:46:50 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/16 14:22:43 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/02/17 18:38:52 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/to_sh.h"
-
-static int		condition(int b, int c)
-{
-	if (b == '\004' || (!c && b == '\n'))
-		return (1);
-	else
-		return (0);
-}
-
-static int		qdq_con(int b, int c)
-{
-	if (c && b != c)
-		return (c);
-	else if (!c && (b == '\'' || b == '\"'))
-		return (b);
-	else
-		return (0);
-}
 
 static int		store_print(t_hist **his, t_line *line)
 {
@@ -84,14 +66,10 @@ char			*get_line(t_hist **his, int prm)
 	{
 		line.buf = 0;
 		read(0, &line.buf, 12);
-		if (condition(line.buf, line.con))
-			break ;
-		else
-		{
+		if (conditions(&line))
 			store_print(his, &line);
-			dprintf(line.fdtty, "%d %d\n", line.curp.col, line.col);
-			line.con = qdq_con(line.buf, line.con);
-		}
+		else
+			break ;
 	}
 	close(line.fdtty);
 	ret = ft_strjoin(line.cmd, line.str);

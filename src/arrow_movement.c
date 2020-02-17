@@ -6,7 +6,7 @@
 /*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 17:41:17 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/16 15:57:49 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/02/17 21:47:42 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,22 +54,39 @@ void		go_left(t_line *line)
 
 static void	go_up(t_line *line)
 {
+	int		n;
 	int		i;
 
 	i = 0;
-	go_left(line);
-	while (line->idx && i++ <= line->col && line->str[line->idx + 1] != '\n')
+	n = line->curp.col;
+	if (line->str[line->idx] == '\n')
+	{
+		go_left(line);
+		i++;
+	}
+	while (line->idx && line->str[line->idx] != '\n' && i++ < line->col)
+		go_left(line);
+	while (line->idx && line->curp.col > n)
 		go_left(line);
 }
 
 static void	go_down(t_line *line)
 {
+	int		n;
 	int		i;
 
 	i = 0;
-	while (line->str[line->idx] && line->str[line->idx] != '\n' &&
+	n = line->col - line->curp.col;
+	while (line->str[line->idx] && line->str[line->idx - 1] != '\n' &&
 			i++ < line->col)
 		go_right(line);
+	if (i < n)
+	{
+		n = line->col - n - 1;
+		i = 0;
+		while (line->str[line->idx] && line->str[line->idx] != '\n' && i++ < n)
+			go_right(line);
+	}
 }
 
 int			arrow_movement(t_line *line)
