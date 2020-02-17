@@ -6,7 +6,7 @@
 /*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/19 15:16:22 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/17 18:38:42 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/02/18 00:09:56 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,6 @@ void				home(t_line *line);
 void				go_left(t_line *line);
 void				go_right(t_line *line);
 
-void				new_line(t_line *line);
 int					navigation(t_line *line);
 int					edit_in_pos(t_line *line);
 int					arrow_movement(t_line *line);

@@ -6,7 +6,7 @@
 /*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 13:46:50 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/17 18:38:52 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/02/18 00:09:16 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,8 @@ static int		store_print(t_hist **his, t_line *line)
 		return (1);
 	else if (his_nav(his, line))
 		return (1);
-	else if (line->buf == '\n')
-	{
-		new_line(line);
+	else if (ccp(line))
 		return (1);
-	}
 	return (0);
 }
 

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   edit_in_pos.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aminewalialami <aminewalialami@student.    +#+  +:+       +#+        */
+/*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 19:56:41 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/16 02:55:26 by aminewalial      ###   ########.fr       */
+/*   Updated: 2020/02/18 00:10:48 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/to_sh.h"
 
-void	add_in_pos(t_line *line)
+void		add_in_pos(t_line *line)
 {
 	char	*tmp;
 	size_t	i;
@@ -37,7 +37,7 @@ void	add_in_pos(t_line *line)
 	go_right(line);
 }
 
-void	del_in_pos(t_line *line)
+void		del_in_pos(t_line *line)
 {
 	char	*tmp;
 	int		i;
@@ -61,12 +61,48 @@ void	del_in_pos(t_line *line)
 	put_in_pos(line->str + line->idx);
 }
 
-int		edit_in_pos(t_line *line)
+static void	nxt_line_curs(t_line *line)
+{
+	cur_down(line);
+	cur_begn(line);
+}
+
+static void	new_line(t_line *line)
+{
+	char	*tmp;
+	int		i;
+
+	tmp = line->cmd;
+	line->cmd = ft_strjoin(tmp, line->str);
+	line->cmd = char_join(line->cmd, '\n');
+	ft_strdel(&tmp);
+	ft_strdel(&line->str);
+	line->str = ft_strnew(1);
+	nxt_line_curs(line);
+	if (line->con == '\'')
+	{
+		put_in_pos("quote> ");
+		line->prm = 7;
+	}
+	else
+	{
+		put_in_pos("dquote> ");
+		line->prm = 8;
+	}
+	i = 0;
+	while (i++ < line->prm)
+		go_right(line);
+	line->idx = 0;
+}
+
+int			edit_in_pos(t_line *line)
 {
 	if (ft_isprint(line->buf))
 		add_in_pos(line);
 	else if (line->buf == BACKSPACE && line->idx)
 		del_in_pos(line);
+	else if (line->buf == '\n')
+		new_line(line);
 	else
 		return (0);
 	return (1);
