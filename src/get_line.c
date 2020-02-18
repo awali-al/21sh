@@ -6,7 +6,7 @@
 /*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 13:46:50 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/18 00:09:16 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/02/18 19:06:23 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ static int		store_print(t_hist **his, t_line *line)
 	else if (navigation(line))
 		return (1);
 	else if (his_nav(his, line))
+		return (1);
+	else if (highlight(line))
 		return (1);
 	else if (ccp(line))
 		return (1);
@@ -46,7 +48,9 @@ static t_line	line_ini(int prm)
 	ret.col = ws.ws_col;
 	ret.row = ws.ws_row;
 	ret.tmp = NULL;
+	ret.hgh = NULL;
 	ret.prm = prm;
+	ret.len = 0;
 	ret.idx = 0;
 	ret.con = 0;
 	return (ret);
