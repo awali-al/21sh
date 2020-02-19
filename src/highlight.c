@@ -6,7 +6,7 @@
 /*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 18:38:12 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/18 19:41:23 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/02/19 18:50:58 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 
 static void	lefty(t_line *line)
 {
-	if (line->hgh && line->hgh == )
+	if (line->hgh)
 	{
+		
 	}
 }
 

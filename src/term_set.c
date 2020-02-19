@@ -6,14 +6,14 @@
 /*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 14:44:40 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/18 19:01:35 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/02/19 18:14:18 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/to_sh.h"
 
+char *g_past;
 struct termios g_saved_attributes;
-char			*g_past;
 
 void	reset_input_mode(void)
 {
@@ -40,7 +40,7 @@ int		term_set(void)
 	char			*term_type;
 	int				ret;
 
-	g_past = ft_strnew(1);
+	g_past = NULL;
 	if (!(term_type = getenv("TERM")))
 	{
 		ft_putendl_fd("TERM is not set.", 2);

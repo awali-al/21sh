@@ -6,27 +6,39 @@
 /*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 13:46:50 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/18 19:06:23 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/02/19 18:30:04 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/to_sh.h"
 
-static int		store_print(t_hist **his, t_line *line)
+static void		reset_highlight(t_line *line)
+{
+	int				i;
+
+	line->hgh = NULL;
+	line->len = 0;
+	i = line->idx;
+	home(line);
+	put_in_pos(line->str);
+	while (line->idx < i)
+		go_right(line);
+}
+
+static void		store_print(t_hist **his, t_line *line)
 {
 	if (edit_in_pos(line))
-		return (1);
+		reset_highlight(line);
 	else if (arrow_movement(line))
-		return (1);
+		reset_highlight(line);
 	else if (navigation(line))
-		return (1);
+		reset_highlight(line);
 	else if (his_nav(his, line))
-		return (1);
+		reset_highlight(line);
 	else if (highlight(line))
-		return (1);
-	else if (ccp(line))
-		return (1);
-	return (0);
+		g_past = ft_strnew(1);
+	else if (g_past)
+		ccp(line);
 }
 
 static t_line	line_ini(int prm)
