@@ -6,13 +6,19 @@
 /*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 21:09:19 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/16 01:48:26 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/02/22 00:04:55 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/to_sh.h"
 
-void	put_in_pos(char *str)
+void	putc_in_pos(t_line *line, char c)
+{
+	ft_putchar(c);
+	go_right(line);
+}
+
+void	puts_in_pos(char *str)
 {
 	tputs(tgetstr("sc", NULL), 1, to_putchar);
 	tputs(tgetstr("cd", NULL), 1, to_putchar);

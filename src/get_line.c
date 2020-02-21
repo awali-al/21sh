@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_line.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aminewalialami <aminewalialami@student.    +#+  +:+       +#+        */
+/*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 13:46:50 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/20 13:59:46 by aminewalial      ###   ########.fr       */
+/*   Updated: 2020/02/21 23:51:04 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,10 @@ static void		reset_highlight(t_line *line)
 
 	line->hgh = NULL;
 	line->len = 0;
+	line->way = 0;
 	i = line->idx;
 	home(line);
-	put_in_pos(line->str);
+	puts_in_pos(line->str);
 	while (line->idx < i)
 		go_right(line);
 }
@@ -63,6 +64,7 @@ static t_line	line_ini(int prm)
 	ret.hgh = NULL;
 	ret.prm = prm;
 	ret.len = 0;
+	ret.way = 0;
 	ret.idx = 0;
 	ret.con = 0;
 	return (ret);

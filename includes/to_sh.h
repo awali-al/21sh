@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   to_sh.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aminewalialami <aminewalialami@student.    +#+  +:+       +#+        */
+/*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/19 15:16:22 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/20 15:43:28 by aminewalial      ###   ########.fr       */
+/*   Updated: 2020/02/22 00:22:22 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@
 
 # include "../libft/libft.h"
 
-# define BLK_COL		"\u001b[30m"
-# define RED_COL		"\x1b[31m"
-# define GRN_COL		"\x1B[32m"
-# define RST_COL		"\x1b[37m"
+# define BLK_COL		"\e[30m"
+# define RED_COL		"\e[31m"
+# define GRN_COL		"\e[32m"
+# define RST_COL		"\e[37m"
 
-# define WHT_BKG		"\u001b[47;1m"
-# define RST_BKG		"\u001b[0m"
+# define WHT_BKG		"\e[47m"
+# define RST_BKG		"\e[0m"
 
 # define ALT_UPAR		1096489755
 # define ALT_DOWN		1113266971
@@ -64,6 +64,7 @@ typedef struct			s_line
 	char				*tmp;
 	char				*hgh;
 	int					len;
+	int					way;
 	int					idx;
 	int					buf;
 	int					col;
@@ -109,7 +110,8 @@ void					cur_left(t_line *line);
 void					cur_upln(t_line *line);
 void					cur_down(t_line *line);
 
-void					put_in_pos(char *str);
+void					putc_in_pos(t_line *line, char c);
+void					puts_in_pos(char *str);
 int						prv_end(t_line *line);
 int						nxt_end(t_line *line);
 
