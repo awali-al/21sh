@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_line.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aminewalialami <aminewalialami@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 13:46:50 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/19 18:30:04 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/02/20 13:59:46 by aminewalial      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ static void		store_print(t_hist **his, t_line *line)
 		reset_highlight(line);
 	else if (highlight(line))
 		g_past = ft_strnew(1);
-	else if (g_past)
-		ccp(line);
+	/*else if (g_past)
+		ccp(line);*/
 }
 
 static t_line	line_ini(int prm)

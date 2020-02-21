@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   to_sh.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aminewalialami <aminewalialami@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/19 15:16:22 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/18 18:58:45 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/02/20 15:43:28 by aminewalial      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,13 @@
 
 # include "../libft/libft.h"
 
+# define BLK_COL		"\u001b[30m"
 # define RED_COL		"\x1b[31m"
-# define GREEN_COL		"\x1B[32m"
-# define RESET_COL		"\x1b[37m"
+# define GRN_COL		"\x1B[32m"
+# define RST_COL		"\x1b[37m"
+
+# define WHT_BKG		"\u001b[47;1m"
+# define RST_BKG		"\u001b[0m"
 
 # define ALT_UPAR		1096489755
 # define ALT_DOWN		1113266971
@@ -114,6 +118,7 @@ void					home(t_line *line);
 void					go_left(t_line *line);
 void					go_right(t_line *line);
 
+int						highlight(t_line *line);
 int						navigation(t_line *line);
 int						edit_in_pos(t_line *line);
 int						arrow_movement(t_line *line);

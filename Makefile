@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+         #
+#    By: aminewalialami <aminewalialami@student.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/05 14:26:42 by aminewalial       #+#    #+#              #
-#    Updated: 2020/02/18 00:18:48 by awali-al         ###   ########.fr        #
+#    Updated: 2020/02/20 14:02:04 by aminewalial      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ SRC_DIR = src
 
 SRC_FILES =  to_sh.c envirenement.c display.c get_line.c term_set.c \
 edit_in_pos.c arrow_movement.c navigation.c extra.c his_nav.c history.c \
- curmove.c positions.c conditions.c
+curmove.c positions.c conditions.c highlight.c
 
 SRC = $(addprefix $(SRC_DIR)/, SRC_FILES)
 

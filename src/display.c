@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   display.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aminewalialami <aminewalialami@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/29 14:34:30 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/01 15:15:27 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/02/20 13:57:36 by aminewalial      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int		display_prompt(int c)
 	static char	*tmp = NULL;
 
 	if (c)
-		col = GREEN_COL;
+		col = GRN_COL;
 	else
 		col = RED_COL;
 	path = getcwd(NULL, 0);
@@ -33,6 +33,6 @@ int		display_prompt(int c)
 	ft_putstr(tmp);
 	ft_putstr(col);
 	ft_putstr(" $> ");
-	ft_putstr(RESET_COL);
+	ft_putstr(RST_COL);
 	return (ft_strlen(tmp) + 4);
 }
