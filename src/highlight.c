@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   highlight.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aminewalialami <aminewalialami@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 18:38:12 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/22 00:25:58 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/02/22 13:20:41 by aminewalial      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ static void	lefty(t_line *line)
 		line->len = 1;
 		line->way = -1;
 	}
+	line->hgh = line->len ? line->hgh : NULL;
 	put_with_hgh(line);
 }
 
@@ -74,6 +75,7 @@ static void	righty(t_line *line)
 		line->len = 1;
 		line->way = 1;
 	}
+	line->hgh = line->len ? line->hgh : NULL;
 	put_with_hgh(line);
 	dprintf(line->fdtty, "%d  %.5s\n", line->len, line->hgh);
 }
