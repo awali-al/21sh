@@ -6,13 +6,13 @@
 /*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 13:46:50 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/21 23:51:04 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/02/24 02:43:03 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/to_sh.h"
 
-static void		reset_highlight(t_line *line)
+void			reset_highlight(t_line *line)
 {
 	int				i;
 
@@ -38,8 +38,8 @@ static void		store_print(t_hist **his, t_line *line)
 		reset_highlight(line);
 	else if (highlight(line))
 		g_past = ft_strnew(1);
-	/*else if (g_past)
-		ccp(line);*/
+	else if (g_past || line->hgh)
+		ccp(line);
 }
 
 static t_line	line_ini(int prm)

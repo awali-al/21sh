@@ -6,7 +6,7 @@
 /*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/19 15:16:22 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/22 00:22:22 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/02/24 02:50:04 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ t_hist					*open_hist(void);
 void					add_to_history(t_hist **his, char *line);
 
 char					*get_line(t_hist **his, int prm);
+void					reset_highlight(t_line *line);
 int						conditions(t_line *line);
 
 void					set_input_mode(void);
