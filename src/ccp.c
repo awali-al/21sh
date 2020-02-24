@@ -6,7 +6,7 @@
 /*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 01:36:11 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/24 02:57:01 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/02/24 23:58:08 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	cut(t_line *line)
 	while (line->str + line->idx > line->hgh)
 		go_left(line);
 	tmp = line->str;
-	p1 = ft_strndup(line->str, line->idx + 1);
+	p1 = ft_strndup(line->str, line->idx);
 	line->str = ft_strjoin(p1, line->hgh + line->len);
 	ft_strdel(&tmp);
 	ft_strdel(&p1);
@@ -40,18 +40,22 @@ static void	pst(t_line *line)
 	char	*tmp;
 	char	*p1;
 	char	*p2;
+	int		i;
 
 	tmp = line->str;
-	p1 = ft_strndup(line->str, line->idx + 1);
+	p1 = ft_strndup(line->str, line->idx);
 	p2 = ft_strjoin(g_past, line->str + line->idx);
 	line->str = ft_strjoin(p1, p2);
 	ft_strdel(&tmp);
 	ft_strdel(&p1);
 	ft_strdel(&p2);
 	reset_highlight(line);
+	i = ft_strlen(g_past);
+	while (i--)
+		go_right(line);
 }
 
-void	ccp(t_line *line)
+void		ccp(t_line *line)
 {
 	if (line->buf == CPY)
 		cpy(line);
@@ -59,4 +63,5 @@ void	ccp(t_line *line)
 		cut(line);
 	else if (line->buf == PST)
 		pst(line);
+	dprintf(line->fdtty, "alfred says : %s\n", g_past);
 }

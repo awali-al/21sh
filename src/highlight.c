@@ -3,35 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   highlight.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aminewalialami <aminewalialami@student.    +#+  +:+       +#+        */
+/*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 18:38:12 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/22 13:20:41 by aminewalial      ###   ########.fr       */
+/*   Updated: 2020/02/24 23:49:13 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/to_sh.h"
 
-static void	put_with_hgh(t_line *line)
+/*static void	put_with_hgh(t_line *line)
 {
 	int		p;
 
 	p = line->idx;
-	tputs(tgetstr("sc", NULL), 1, to_putchar);
 	home(line);
-	tputs(tgetstr("cd", NULL), 1, to_putchar);
 	while (line->str[line->idx])
 	{
-		if (line->str + line->idx == line->hgh)
+		if ((line->idx > (line->hgh - line->str)) &&
+				line->idx > ((line->hgh + line->len) - line->str))
 			ft_putstr(WHT_BKG);
-		if (line->str + line->idx == line->hgh + line->len || !line->str[line->idx + 1])
-			ft_putstr(RST_BKG);
 		puts_in_pos(line->str + line->idx);
 		go_right(line);
+		if (!line->str[line->idx])
+			ft_putstr(RST_BKG);
 	}
-	tputs(tgetstr("rc", NULL), 1, to_putchar);
-	line->idx = p;
-}
+}*/
 
 static void	lefty(t_line *line)
 {
@@ -52,8 +49,8 @@ static void	lefty(t_line *line)
 		line->len = 1;
 		line->way = -1;
 	}
-	line->hgh = line->len ? line->hgh : NULL;
-	put_with_hgh(line);
+	if (!line->len)
+		reset_highlight(line);
 }
 
 static void	righty(t_line *line)
@@ -75,18 +72,18 @@ static void	righty(t_line *line)
 		line->len = 1;
 		line->way = 1;
 	}
-	line->hgh = line->len ? line->hgh : NULL;
-	put_with_hgh(line);
-	dprintf(line->fdtty, "%d  %.5s\n", line->len, line->hgh);
+	if (!line->len)
+		reset_highlight(line);
 }
 
 int			highlight(t_line *line)
 {
 	if (line->buf == ALT_LEFT && line->idx)
 		lefty(line);
-	else if (line->buf == ALT_RGHT && line->str[line->idx + 1])
+	else if (line->buf == ALT_RGHT && line->str[line->idx])
 		righty(line);
 	else
 		return (0);
+	dprintf(line->fdtty, "%d  %.*s\n", line->len, line->len, line->hgh);
 	return (1);
 }
