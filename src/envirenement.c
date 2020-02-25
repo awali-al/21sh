@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   envirenement.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aminewalialami <aminewalialami@student.    +#+  +:+       +#+        */
+/*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 11:06:42 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/05 23:37:11 by aminewalial      ###   ########.fr       */
+/*   Updated: 2020/02/25 14:39:49 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/to_sh.h"
+#include "../includes/to_sh_rl.h"
 
 char		*value_of(char **env, char *key)
 {

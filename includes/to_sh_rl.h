@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   to_sh.h                                            :+:      :+:    :+:   */
+/*   to_sh_rl.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/19 15:16:22 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/25 02:21:15 by awali-al         ###   ########.fr       */
+/*   Created: 2020/02/25 14:40:20 by awali-al          #+#    #+#             */
+/*   Updated: 2020/02/25 14:41:49 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TO_SH_H
-# define TO_SH_H
+#ifndef TO_SH_RL_H
+# define TO_SH_RL_H
 
 # include <stdio.h>
 # include <termios.h>
@@ -86,18 +86,18 @@ extern char				*g_past;
 
 char					*char_join(char *str, int c);
 void					free_2d(char ***dar);
+int						to_putstr(char *s);
 int						to_putchar(int c);
 int						is_ws(char c);
 
 char					**my_envirenement(char **env);
 char					*value_of(char **env, char *key);
 int						term_set(void);
-int						display_prompt(int c);
 
 t_hist					*open_hist(void);
 void					add_to_history(t_hist **his, char *line);
 
-char					*get_line(t_hist **his, int prm);
+char					*get_line(t_hist **his, char *prom, int c);
 void					reset_highlight(t_line *line);
 int						conditions(t_line *line);
 

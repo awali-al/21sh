@@ -6,24 +6,27 @@
 /*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 13:46:50 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/25 02:11:02 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/02/25 20:47:09 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/to_sh.h"
+#include "../includes/to_sh_rl.h"
 
 void			reset_highlight(t_line *line)
 {
 	int				i;
 
-	line->hgh = NULL;
-	line->len = 0;
-	line->way = 0;
-	i = line->idx;
-	home(line);
-	put_in_pos(line->str);
-	while (line->idx < i)
-		go_right(line);
+	if (line->hgh)
+	{
+		line->hgh = NULL;
+		line->len = 0;
+		line->way = 0;
+		i = line->idx;
+		home(line);
+		put_in_pos(line->str);
+		while (line->idx < i)
+			go_right(line);
+	}
 }
 
 static void		store_print(t_hist **his, t_line *line)
@@ -42,13 +45,39 @@ static void		store_print(t_hist **his, t_line *line)
 		ccp(line);
 }
 
-static t_line	line_ini(int prm)
+static int		display_prompt(int c)
+{
+	char		*col;
+	char		*path;
+	static char	*tmp = NULL;
+
+	if (c)
+		col = GRN_COL;
+	else
+		col = RED_COL;
+	path = getcwd(NULL, 0);
+	if (path)
+	{
+		ft_strdel(&tmp);
+		tmp = ft_strrchr(path, '/');
+		tmp = tmp && tmp[1] ? ft_strdup(tmp + 1) : ft_strdup(path);
+		ft_strdel(&path);
+	}
+	ft_putstr(tmp);
+	ft_putstr(col);
+	ft_putstr(" $> ");
+	ft_putstr(RST_COL);
+	return (ft_strlen(tmp) + 4);
+}
+
+static t_line	line_ini(char *prom, int c)
 {
 	struct winsize	ws;
 	t_line			ret;
 	char			buf[8];
 	int				i;
 
+	ret.prm = prom ? to_putstr(prom) : display_prompt(c);
 	ret.fdtty = open("/dev/ttys003", O_WRONLY);
 	ioctl(0, TIOCGWINSZ, &ws);
 	tputs("\033[6n", 4, to_putchar);
@@ -62,7 +91,6 @@ static t_line	line_ini(int prm)
 	ret.row = ws.ws_row;
 	ret.tmp = NULL;
 	ret.hgh = NULL;
-	ret.prm = prm;
 	ret.len = 0;
 	ret.way = 0;
 	ret.idx = 0;
@@ -70,15 +98,16 @@ static t_line	line_ini(int prm)
 	return (ret);
 }
 
-char			*get_line(t_hist **his, int prm)
+char			*get_line(t_hist **his, char *prom, int c)
 {
 	t_line			line;
 	char			*ret;
 
 	set_input_mode();
-	line = line_ini(prm);
+	line = line_ini(prom, c);
 	while (1)
 	{
+		// dprintf(line.fdtty, "|  |wc: %d cc: %d wr: %d cr: %d|  |\n", line.col, line.curp.col, line.row, line.curp.row);
 		line.buf = 0;
 		read(0, &line.buf, 12);
 		if (conditions(&line))

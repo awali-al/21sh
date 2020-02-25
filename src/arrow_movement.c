@@ -6,11 +6,11 @@
 /*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 17:41:17 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/17 22:02:34 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/02/25 21:54:41 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/to_sh.h"
+#include "../includes/to_sh_rl.h"
 
 void		go_right(t_line *line)
 {
@@ -18,16 +18,21 @@ void		go_right(t_line *line)
 
 	if (line->str[line->idx] == '\n' || line->col == line->curp.col)
 	{
-		if (line->row != line->curp.row)
-			cur_down(line);
+		cur_down(line);
 		cur_begn(line);
 	}
-	else if (line->row != line->curp.row)
+	/*else if (line->row != line->curp.row)
 		cur_rght(line);
 	else
 	{
 		cur_rght(line);
 		if ((l = nxt_end(line)) && (line->curp.col + l) == line->col + 3)
+			cur_upln(line);
+	}*/
+	else
+	{
+		cur_rght(line);
+		if (nxt_end(line))
 			cur_upln(line);
 	}
 	line->idx++;

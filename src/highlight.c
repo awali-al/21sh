@@ -6,11 +6,11 @@
 /*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 18:38:12 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/25 02:26:31 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/02/25 19:56:50 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/to_sh.h"
+#include "../includes/to_sh_rl.h"
 
 static void	put_with_hgh(t_line *line, int c)
 {
@@ -35,6 +35,8 @@ static void	put_with_hgh(t_line *line, int c)
 		putc_in_pos(line->str[line->idx]);
 		go_right(line);
 	}
+	ft_putstr(RST_HGH);
+	tputs(tgetstr("cd", NULL), 1, to_putchar);
 	while (line->idx > p)
 		go_left(line);
 }
@@ -101,6 +103,5 @@ int			highlight(t_line *line)
 		righty(line);
 	else
 		return (0);
-	dprintf(line->fdtty, "%d  %.*s\n", line->len, line->len, line->hgh);
 	return (1);
 }

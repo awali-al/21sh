@@ -6,7 +6,7 @@
 #    By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/05 14:26:42 by aminewalial       #+#    #+#              #
-#    Updated: 2020/02/24 15:53:06 by awali-al         ###   ########.fr        #
+#    Updated: 2020/02/25 14:44:28 by awali-al         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,9 +16,9 @@ FLAGS = -g -Wall -Wextra -Werror
 
 SRC_DIR = src
 
-SRC_FILES =  to_sh.c envirenement.c display.c get_line.c term_set.c \
-edit_in_pos.c arrow_movement.c navigation.c extra.c his_nav.c history.c \
-curmove.c positions.c conditions.c highlight.c ccp.c
+SRC_FILES =  to_sh.c envirenement.c get_line.c term_set.c edit_in_pos.c \
+arrow_movement.c navigation.c extra.c his_nav.c history.c curmove.c \
+positions.c conditions.c highlight.c ccp.c
 
 SRC = $(addprefix $(SRC_DIR)/, SRC_FILES)
 
@@ -28,7 +28,7 @@ OBJ = $(addprefix $(OBJ_DIR)/, $(SRC_FILES:.c=.o))
 
 LIB = libft/libft.a
 
-HEADER = includes/to_sh.h
+HEADER = includes/to_sh_rl.h
 
 all : $(NAME)
 

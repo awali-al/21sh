@@ -6,11 +6,11 @@
 /*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 22:04:16 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/17 19:32:20 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/02/25 14:39:49 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/to_sh.h"
+#include "../includes/to_sh_rl.h"
 
 int		conditions(t_line *line)
 {

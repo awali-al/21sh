@@ -6,11 +6,11 @@
 /*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 19:56:41 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/25 02:11:02 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/02/25 14:39:49 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/to_sh.h"
+#include "../includes/to_sh_rl.h"
 
 void		add_in_pos(t_line *line)
 {

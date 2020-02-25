@@ -6,11 +6,11 @@
 /*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/05 23:34:31 by aminewalial       #+#    #+#             */
-/*   Updated: 2020/02/15 20:16:24 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/02/25 14:39:49 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/to_sh.h"
+#include "../includes/to_sh_rl.h"
 
 char	*char_join(char *str, int c)
 {
@@ -32,6 +32,22 @@ int		to_putchar(int c)
 {
 	write(1, &c, 1);
 	return (0);
+}
+
+int		to_putstr(char *s)
+{
+	int		i;
+
+	i = 0;
+	if (s)
+	{
+		while (s[i])
+		{
+			ft_putchar(s[i]);
+			i++;
+		}
+	}
+	return (i);
 }
 
 void	free_2d(char ***dar)

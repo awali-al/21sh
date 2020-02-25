@@ -6,17 +6,16 @@
 /*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/19 15:15:48 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/18 19:00:21 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/02/25 14:39:49 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/to_sh.h"
+#include "../includes/to_sh_rl.h"
 
 int		main(int ac, char **av, char **ev)
 {
 	t_hist	*his;
 	char	*line;
-	int		prm;
 
 	(void)av;
 	tcgetattr(0, &g_saved_attributes);
@@ -28,8 +27,7 @@ int		main(int ac, char **av, char **ev)
 		while (ft_strcmp(line, "exit"))
 		{
 			ft_strdel(&line);
-			prm = display_prompt(ac);
-			line = get_line(&his, prm);
+			line = get_line(&his, NULL, ac);
 			write(1, "\n", 1);
 		}
 	ev ? free_2d(&ev) : 0;
