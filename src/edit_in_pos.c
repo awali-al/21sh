@@ -6,7 +6,7 @@
 /*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 19:56:41 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/21 23:51:04 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/02/25 02:11:02 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void		add_in_pos(t_line *line)
 	}
 	ft_strdel(&(line->str));
 	line->str = tmp;
-	puts_in_pos(line->str + line->idx);
+	put_in_pos(line->str + line->idx);
 	go_right(line);
 }
 
@@ -58,7 +58,7 @@ void		del_in_pos(t_line *line)
 	}
 	ft_strdel(&(line->str));
 	line->str = tmp;
-	puts_in_pos(line->str + line->idx);
+	put_in_pos(line->str + line->idx);
 }
 
 static void	nxt_line_curs(t_line *line)
@@ -81,12 +81,12 @@ static void	new_line(t_line *line)
 	nxt_line_curs(line);
 	if (line->con == '\'')
 	{
-		puts_in_pos("quote> ");
+		put_in_pos("quote> ");
 		line->prm = 7;
 	}
 	else
 	{
-		puts_in_pos("dquote> ");
+		put_in_pos("dquote> ");
 		line->prm = 8;
 	}
 	i = 0;

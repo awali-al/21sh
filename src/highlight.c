@@ -6,29 +6,38 @@
 /*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 18:38:12 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/24 23:49:13 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/02/25 02:26:31 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/to_sh.h"
 
-/*static void	put_with_hgh(t_line *line)
+static void	put_with_hgh(t_line *line, int c)
 {
 	int		p;
+	int		i;
 
 	p = line->idx;
-	home(line);
+	while (line->str + line->idx > line->hgh)
+		go_left(line);
+	if (c)
+	{
+		go_left(line);
+		putc_in_pos(line->str[line->idx]);
+		go_right(line);
+	}
+	i = 0;
+	ft_putstr(SET_HGH);
 	while (line->str[line->idx])
 	{
-		if ((line->idx > (line->hgh - line->str)) &&
-				line->idx > ((line->hgh + line->len) - line->str))
-			ft_putstr(WHT_BKG);
-		puts_in_pos(line->str + line->idx);
+		if (i++ == line->len)
+			ft_putstr(RST_HGH);
+		putc_in_pos(line->str[line->idx]);
 		go_right(line);
-		if (!line->str[line->idx])
-			ft_putstr(RST_BKG);
 	}
-}*/
+	while (line->idx > p)
+		go_left(line);
+}
 
 static void	lefty(t_line *line)
 {
@@ -51,11 +60,16 @@ static void	lefty(t_line *line)
 	}
 	if (!line->len)
 		reset_highlight(line);
+	else
+		put_with_hgh(line, 0);
 }
 
 static void	righty(t_line *line)
 {
+	int		c;
+
 	go_right(line);
+	c = 0;
 	if (line->hgh)
 	{
 		if (line->way == 1)
@@ -64,6 +78,7 @@ static void	righty(t_line *line)
 		{
 			line->hgh++;
 			line->len--;
+			c++;
 		}
 	}
 	else
@@ -74,6 +89,8 @@ static void	righty(t_line *line)
 	}
 	if (!line->len)
 		reset_highlight(line);
+	else
+		put_with_hgh(line, c);
 }
 
 int			highlight(t_line *line)

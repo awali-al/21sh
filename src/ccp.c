@@ -6,7 +6,7 @@
 /*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 01:36:11 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/24 23:58:08 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/02/25 02:28:08 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,10 @@ static void	pst(t_line *line)
 
 void		ccp(t_line *line)
 {
-	if (line->buf == CPY)
+	if (line->buf == CPY && line->hgh)
 		cpy(line);
-	else if (line->buf == CUT)
+	else if (line->buf == CUT && line->hgh)
 		cut(line);
 	else if (line->buf == PST)
 		pst(line);
-	dprintf(line->fdtty, "alfred says : %s\n", g_past);
 }

@@ -6,7 +6,7 @@
 /*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 01:29:39 by aminewalial       #+#    #+#             */
-/*   Updated: 2020/02/21 23:51:04 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/02/25 02:11:02 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	prev_line(t_hist **his, t_line *line)
 		else if ((*his)->prv)
 			*his = (*his)->prv;
 		line->str = (*his)->cmd;
-		puts_in_pos(line->str);
+		put_in_pos(line->str);
 		end(line);
 	}
 }
@@ -42,7 +42,7 @@ static void	next_line(t_hist **his, t_line *line)
 			line->str = line->tmp;
 			line->tmp = NULL;
 		}
-		puts_in_pos(line->str);
+		put_in_pos(line->str);
 		end(line);
 	}
 }
