@@ -6,7 +6,7 @@
 /*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/01 17:36:49 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/25 21:35:59 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/02/26 21:08:39 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,17 @@ void		end(t_line *line)
 
 static void	prv_word(t_line *line)
 {
-	while (line->idx && is_ws(line->str[line->idx - 1]))
+	while (line->idx && !ft_isalnum(line->str[line->idx - 1]))
 		go_left(line);
-	while (line->idx && !is_ws(line->str[line->idx - 1]))
+	while (line->idx && ft_isalnum(line->str[line->idx - 1]))
 		go_left(line);
 }
 
 static void	nxt_word(t_line *line)
 {
-	while (line->str[line->idx] && !is_ws(line->str[line->idx]))
+	while (line->str[line->idx] && ft_isalnum(line->str[line->idx]))
 		go_right(line);
-	while (line->str[line->idx] && is_ws(line->str[line->idx]))
+	while (line->str[line->idx] && !ft_isalnum(line->str[line->idx]))
 		go_right(line);
 }
 

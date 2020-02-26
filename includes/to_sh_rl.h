@@ -6,7 +6,7 @@
 /*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 14:40:20 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/25 14:41:49 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/02/26 20:05:21 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ void					cur_down(t_line *line);
 void					putc_in_pos(char c);
 void					put_in_pos(char *str);
 int						prv_end(t_line *line);
-int						nxt_end(t_line *line);
+int						lines_in_cmd(char *str, int prm, int col);
 
 void					end(t_line *line);
 void					home(t_line *line);

@@ -6,7 +6,7 @@
 /*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 21:09:19 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/25 22:39:16 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/02/26 20:05:12 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,30 +41,3 @@ int		prv_end(t_line *line)
 		n += line->prm;
 	return (n % line->col);
 }
-
-int		nxt_end(t_line *line)
-{
-	char	*pn;
-	int		l;
-	int		e;
-
-	e = (line->row - line->curp.row + 1) * line->col - line->curp.col;
-	if ((pn = ft_strchr(line->str + line->idx, '\n')) &&
-			pn + line->curp.col = line->col)
-		return (1);
-	else
-	{
-		l = ft_strlen
-	}
-}
-
-/*int		nxt_end(t_line *line)
-{
-	char	*n;
-
-	n = ft_strchr(line->str + line->idx, '\n');
-	if (n)
-		return (n - (line->str + line->idx));
-	else
-		return (ft_strlen(line->str + line->idx));
-}*/

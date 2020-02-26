@@ -6,7 +6,7 @@
 /*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 13:46:50 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/25 20:47:09 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/02/26 19:05:21 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,6 @@ char			*get_line(t_hist **his, char *prom, int c)
 	line = line_ini(prom, c);
 	while (1)
 	{
-		// dprintf(line.fdtty, "|  |wc: %d cc: %d wr: %d cr: %d|  |\n", line.col, line.curp.col, line.row, line.curp.row);
 		line.buf = 0;
 		read(0, &line.buf, 12);
 		if (conditions(&line))

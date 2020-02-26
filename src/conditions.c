@@ -6,11 +6,24 @@
 /*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 22:04:16 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/25 14:39:49 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/02/26 20:14:24 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/to_sh_rl.h"
+
+static int	stop(t_line *line)
+{
+	end(line);
+	if (line->buf == '\004')
+	{
+		ft_strdel(&line->cmd);
+		ft_strdel(&line->str);
+		line->cmd = ft_strnew(1);
+		line->str = ft_strnew(1);
+	}
+	return (0);
+}
 
 int		conditions(t_line *line)
 {
@@ -38,5 +51,5 @@ int		conditions(t_line *line)
 		i++;
 	}
 	ft_strdel(&str);
-	return (0);
+	return (stop(line));
 }

@@ -6,7 +6,7 @@
 /*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 19:33:04 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/25 14:39:49 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/02/26 21:13:39 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,12 @@ static void		file_save(t_hist *his, char *str)
 void			add_to_history(t_hist **his, char *line)
 {
 	t_hist	*node;
+	int		c;
 
-	if (line && line[0])
+	c = 1;
+	if (*his && !ft_strcmp(line, (*his)->cmd))
+		c = 0;
+	if (line && line[0] && c)
 	{
 		file_save(*his, line);
 		node = new_node(line);

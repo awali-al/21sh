@@ -6,7 +6,7 @@
 /*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 17:41:17 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/25 21:54:41 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/02/26 20:04:57 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,17 @@
 
 void		go_right(t_line *line)
 {
-	int		l;
-
 	if (line->str[line->idx] == '\n' || line->col == line->curp.col)
 	{
 		cur_down(line);
 		cur_begn(line);
 	}
-	/*else if (line->row != line->curp.row)
-		cur_rght(line);
 	else
 	{
-		cur_rght(line);
-		if ((l = nxt_end(line)) && (line->curp.col + l) == line->col + 3)
+		if (lines_in_cmd(line->str + line->idx, line->curp.col - 1, line->col)
+				> (line->row - line->curp.row))
 			cur_upln(line);
-	}*/
-	else
-	{
 		cur_rght(line);
-		if (nxt_end(line))
-			cur_upln(line);
 	}
 	line->idx++;
 }
