@@ -6,7 +6,7 @@
 /*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 13:46:50 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/26 19:05:21 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/02/27 00:57:09 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,10 @@ static void		store_print(t_hist **his, t_line *line)
 		reset_highlight(line);
 	else if (his_nav(his, line))
 		reset_highlight(line);
+	else if (line->buf == ALT_UPLN)
+		up_line(line);
+	// else if (line->buf == ALT_DNLN)
+	// 	dn_line(line);
 	else if (highlight(line))
 		g_past = ft_strnew(1);
 	else if (g_past || line->hgh)

@@ -6,7 +6,7 @@
 /*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 01:36:11 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/25 14:39:49 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/02/27 00:57:29 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,11 @@ static void	pst(t_line *line)
 	tmp = line->str;
 	p1 = ft_strndup(line->str, line->idx);
 	p2 = ft_strjoin(g_past, line->str + line->idx);
-	line->str = ft_strjoin(p1, p2);
 	ft_strdel(&tmp);
+	line->str = ft_strjoin(p1, p2);
 	ft_strdel(&p1);
 	ft_strdel(&p2);
+	line->hgh = line->str;
 	reset_highlight(line);
 	i = ft_strlen(g_past);
 	while (i--)

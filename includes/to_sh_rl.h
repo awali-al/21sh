@@ -6,7 +6,7 @@
 /*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 14:40:20 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/26 20:05:21 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/02/26 21:40:34 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,9 @@
 # define ALT_DOWN		1113266971
 # define ALT_RGHT		1130044187
 # define ALT_LEFT		1146821403
+
+# define ALT_UPLN		895163163
+# define ALT_DNLN		911940379
 
 # define PRV_WRD		10783202
 # define NXT_WRD		10848738
@@ -121,6 +124,7 @@ void					go_left(t_line *line);
 void					go_right(t_line *line);
 
 void					ccp(t_line *line);
+void					up_line(t_line *line);
 int						highlight(t_line *line);
 int						navigation(t_line *line);
 int						edit_in_pos(t_line *line);
