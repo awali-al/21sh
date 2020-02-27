@@ -6,7 +6,7 @@
 /*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 19:33:04 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/27 02:00:10 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/02/27 22:47:47 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,24 +57,28 @@ void			add_to_history(t_hist **his, char *line)
 	t_hist	*node;
 	int		c;
 
-	c = 1;
-	while ((*his) && (*his)->nxt)
-		*his = (*his)->nxt;
-	if (*his && !ft_strcmp(line, (*his)->cmd))
-		c = 0;
-	if (line && line[0] && c)
+	if (line)
 	{
-		file_save(*his, line);
-		node = new_node(line);
-		if (*his)
+		printf("the line is messed up\n");
+		c = 1;
+		while ((*his) && (*his)->nxt)
+			*his = (*his)->nxt;
+		if (*his && !ft_strcmp(line, (*his)->cmd))
+			c = 0;
+		if (line && line[0] && c)
 		{
-			node->i = (*his)->i + 1;
-			node->prv = *his;
-			(*his)->nxt = node;
+			file_save(*his, line);
+			node = new_node(line);
+			if (*his)
+			{
+				node->i = (*his)->i + 1;
+				node->prv = *his;
+				(*his)->nxt = node;
+			}
+			else
+				node->i = 1;
+			*his = node;
 		}
-		else
-			node->i = 1;
-		*his = node;
 	}
 }
 

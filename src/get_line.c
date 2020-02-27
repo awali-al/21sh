@@ -6,7 +6,7 @@
 /*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 13:46:50 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/27 00:57:09 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/02/27 22:45:01 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void			reset_highlight(t_line *line)
 	}
 }
 
-static void		store_print(t_hist **his, t_line *line)
+static void		store_print(t_hist *his, t_line *line)
 {
 	if (edit_in_pos(line))
 		reset_highlight(line);
@@ -39,10 +39,6 @@ static void		store_print(t_hist **his, t_line *line)
 		reset_highlight(line);
 	else if (his_nav(his, line))
 		reset_highlight(line);
-	else if (line->buf == ALT_UPLN)
-		up_line(line);
-	// else if (line->buf == ALT_DNLN)
-	// 	dn_line(line);
 	else if (highlight(line))
 		g_past = ft_strnew(1);
 	else if (g_past || line->hgh)
@@ -89,7 +85,6 @@ static t_line	line_ini(char *prom, int c)
 	buf[i] = '\0';
 	ret.curp.col = ft_atoi(ft_strchr(buf, ';') + 1);
 	ret.curp.row = ft_atoi(buf + 2);
-	ret.cmd = ft_strnew(1);
 	ret.str = ft_strnew(1);
 	ret.col = ws.ws_col;
 	ret.row = ws.ws_row;
@@ -98,11 +93,10 @@ static t_line	line_ini(char *prom, int c)
 	ret.len = 0;
 	ret.way = 0;
 	ret.idx = 0;
-	ret.con = 0;
 	return (ret);
 }
 
-char			*get_line(t_hist **his, char *prom, int c)
+char			*get_line(t_hist *his, char *prom, int c)
 {
 	t_line			line;
 	char			*ret;
@@ -113,14 +107,17 @@ char			*get_line(t_hist **his, char *prom, int c)
 	{
 		line.buf = 0;
 		read(0, &line.buf, 12);
-		if (conditions(&line))
+		if (line.buf != '\n' && line.buf != '\004')
 			store_print(his, &line);
 		else
 			break ;
 	}
+	if (line.buf == '\004')
+		ret = NULL;
+	else
+		ret = ft_strdup(line.str);
+	ft_strdel(&line.str);
 	close(line.fdtty);
-	ret = ft_strjoin(line.cmd, line.str);
 	reset_input_mode();
-	add_to_history(his, ret);
 	return (ret);
 }

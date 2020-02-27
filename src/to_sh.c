@@ -6,7 +6,7 @@
 /*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/19 15:15:48 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/25 14:39:49 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/02/27 22:48:00 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,12 @@ int		main(int ac, char **av, char **ev)
 	ev = my_envirenement(ev);
 	line = ft_strdup("hi");
 	if (!term_set())
-		while (ft_strcmp(line, "exit"))
+		while (line && ft_strcmp(line, "exit"))
 		{
 			ft_strdel(&line);
-			line = get_line(&his, NULL, ac);
+			line = get_line(his, NULL, ac);
 			write(1, "\n", 1);
+			add_to_history(&his, line);
 		}
 	ev ? free_2d(&ev) : 0;
 	return (0);

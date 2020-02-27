@@ -6,7 +6,7 @@
 /*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 14:40:20 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/26 21:40:34 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/02/27 22:37:53 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ typedef struct			s_pos
 typedef struct			s_line
 {
 	t_pos				curp;
-	char				*cmd;
 	char				*str;
 	char				*tmp;
 	char				*hgh;
@@ -72,7 +71,6 @@ typedef struct			s_line
 	int					col;
 	int					row;
 	int					prm;
-	int					con;
 	int					fdtty;
 }						t_line;
 
@@ -100,9 +98,8 @@ int						term_set(void);
 t_hist					*open_hist(void);
 void					add_to_history(t_hist **his, char *line);
 
-char					*get_line(t_hist **his, char *prom, int c);
+char					*get_line(t_hist *his, char *prom, int c);
 void					reset_highlight(t_line *line);
-int						conditions(t_line *line);
 
 void					set_input_mode(void);
 void					reset_input_mode(void);
@@ -124,11 +121,10 @@ void					go_left(t_line *line);
 void					go_right(t_line *line);
 
 void					ccp(t_line *line);
-void					up_line(t_line *line);
 int						highlight(t_line *line);
 int						navigation(t_line *line);
 int						edit_in_pos(t_line *line);
 int						arrow_movement(t_line *line);
-int						his_nav(t_hist **his, t_line *line);
+int						his_nav(t_hist *his, t_line *line);
 
 #endif
