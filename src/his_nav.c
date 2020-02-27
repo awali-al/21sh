@@ -6,7 +6,7 @@
 /*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 01:29:39 by aminewalial       #+#    #+#             */
-/*   Updated: 2020/02/26 19:55:15 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/02/27 01:57:13 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int			lines_in_cmd(char *str, int prm, int col)
 	int		c;
 
 	i = 0;
-	c = 0;
+	c = 1;
 	while (str[i])
 	{
 		if (str[i] == '\n' || prm == col)
@@ -36,6 +36,7 @@ int			lines_in_cmd(char *str, int prm, int col)
 static void	prev_line(t_hist **his, t_line *line)
 {
 	int		n;
+	int		i;
 
 	n = lines_in_cmd(line->str, line->prm, line->col);
 	if (*his)
@@ -48,8 +49,11 @@ static void	prev_line(t_hist **his, t_line *line)
 		line->str = (*his)->cmd;
 		put_in_pos(line->str);
 		n = lines_in_cmd(line->str, line->prm, line->col) - n;
-		while (n-- > (line->row - line->curp.row))
+		i = line->row - line->curp.row;
+		dprintf(line->fdtty, "%d %d\n", line->row, line->curp.row);
+		while (n-- > i)
 			cur_upln(line);
+		line->idx = 0;
 		end(line);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 19:33:04 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/26 21:13:39 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/02/27 02:00:10 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ void			add_to_history(t_hist **his, char *line)
 	int		c;
 
 	c = 1;
+	while ((*his) && (*his)->nxt)
+		*his = (*his)->nxt;
 	if (*his && !ft_strcmp(line, (*his)->cmd))
 		c = 0;
 	if (line && line[0] && c)
