@@ -6,7 +6,7 @@
 /*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 14:40:20 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/27 22:37:53 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/02/28 16:35:43 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ int						term_set(void);
 t_hist					*open_hist(void);
 void					add_to_history(t_hist **his, char *line);
 
-char					*get_line(t_hist *his, char *prom, int c);
+char					*get_line(t_hist **his, char *prom, int c);
 void					reset_highlight(t_line *line);
 
 void					set_input_mode(void);
@@ -125,6 +125,6 @@ int						highlight(t_line *line);
 int						navigation(t_line *line);
 int						edit_in_pos(t_line *line);
 int						arrow_movement(t_line *line);
-int						his_nav(t_hist *his, t_line *line);
+int						his_nav(t_hist **his, t_line *line);
 
 #endif

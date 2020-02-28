@@ -6,7 +6,7 @@
 /*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 13:46:50 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/27 22:45:01 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/02/28 16:35:29 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void			reset_highlight(t_line *line)
 	}
 }
 
-static void		store_print(t_hist *his, t_line *line)
+static void		store_print(t_hist **his, t_line *line)
 {
 	if (edit_in_pos(line))
 		reset_highlight(line);
@@ -96,7 +96,7 @@ static t_line	line_ini(char *prom, int c)
 	return (ret);
 }
 
-char			*get_line(t_hist *his, char *prom, int c)
+char			*get_line(t_hist **his, char *prom, int c)
 {
 	t_line			line;
 	char			*ret;

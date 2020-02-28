@@ -6,7 +6,7 @@
 /*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 01:29:39 by aminewalial       #+#    #+#             */
-/*   Updated: 2020/02/27 23:42:20 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/02/28 16:36:17 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,20 +33,27 @@ int			lines_in_cmd(char *str, int prm, int col)
 	return (c);
 }
 
-static void	prev_line(t_hist *his, t_line *line)
+static void	prev_line(t_hist **his, t_line *line)
 {
 	int		n;
 	int		i;
 
 	n = lines_in_cmd(line->str, line->prm, line->col);
-	if (his)
+	if (*his)
 	{
 		home(line);
 		if (!line->tmp)
+		{
 			line->tmp = line->str;
-		else if (his->prv)
-			his = his->prv;
-		line->str = his->cmd;
+			dprintf(line->fdtty, "hi\n");
+		}
+		else if ((*his)->prv)
+		{
+			(*his) = (*his)->prv;
+			dprintf(line->fdtty, "going up\n");
+		}
+		dprintf(line->fdtty, "%d %s %p %p\n", (*his)->i, (*his)->cmd, (*his)->prv, (*his));
+		line->str = (*his)->cmd;
 		put_in_pos(line->str);
 		n = lines_in_cmd(line->str, line->prm, line->col) - n;
 		i = line->row - line->curp.row;
@@ -57,15 +64,15 @@ static void	prev_line(t_hist *his, t_line *line)
 	}
 }
 
-static void	next_line(t_hist *his, t_line *line)
+static void	next_line(t_hist **his, t_line *line)
 {
 	if (line->tmp)
 	{
 		home(line);
-		if (his->nxt)
+		if ((*his)->nxt)
 		{
-			his = his->nxt;
-			line->str = his->cmd;
+			(*his) = (*his)->nxt;
+			line->str = (*his)->cmd;
 		}
 		else
 		{
@@ -77,7 +84,7 @@ static void	next_line(t_hist *his, t_line *line)
 	}
 }
 
-int			his_nav(t_hist *his, t_line *line)
+int			his_nav(t_hist **his, t_line *line)
 {
 	if (line->buf == UPAR)
 		prev_line(his, line);
