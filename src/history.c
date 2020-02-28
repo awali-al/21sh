@@ -6,7 +6,7 @@
 /*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 19:33:04 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/27 22:47:47 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/02/27 22:58:58 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ void			add_to_history(t_hist **his, char *line)
 
 	if (line)
 	{
-		printf("the line is messed up\n");
 		c = 1;
 		while ((*his) && (*his)->nxt)
 			*his = (*his)->nxt;

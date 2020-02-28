@@ -6,7 +6,7 @@
 /*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 01:29:39 by aminewalial       #+#    #+#             */
-/*   Updated: 2020/02/27 22:36:30 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/02/27 23:42:20 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ static void	prev_line(t_hist *his, t_line *line)
 		put_in_pos(line->str);
 		n = lines_in_cmd(line->str, line->prm, line->col) - n;
 		i = line->row - line->curp.row;
-		dprintf(line->fdtty, "%d %d\n", line->row, line->curp.row);
 		while (n-- > i)
 			cur_upln(line);
 		line->idx = 0;
