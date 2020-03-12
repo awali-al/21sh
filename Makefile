@@ -6,11 +6,11 @@
 #    By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/05 14:26:42 by aminewalial       #+#    #+#              #
-#    Updated: 2020/02/27 22:33:01 by awali-al         ###   ########.fr        #
+#    Updated: 2020/03/12 21:36:58 by awali-al         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = 21sh
+˜NAME = 21sh
 
 FLAGS = -g -Wall -Wextra -Werror
 
@@ -18,7 +18,7 @@ SRC_DIR = src
 
 SRC_FILES =  to_sh.c envirenement.c get_line.c term_set.c edit_in_pos.c \
 arrow_movement.c navigation.c extra.c his_nav.c history.c curmove.c ccp.c \
-positions.c highlight.c
+positions.c highlight.c my_type.c
 
 SRC = $(addprefix $(SRC_DIR)/, SRC_FILES)
 
