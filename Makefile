@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+         #
+#    By: awali-al <awali-al@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/05 14:26:42 by aminewalial       #+#    #+#              #
-#    Updated: 2020/03/12 21:36:58 by awali-al         ###   ########.fr        #
+#    Updated: 2020/11/10 12:05:47 by awali-al         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 ˜NAME = 21sh
 
-FLAGS = -g -Wall -Wextra -Werror
+FLAGS = -g -Wall -Wextra -Werror -ltermcap
 
 SRC_DIR = src
 

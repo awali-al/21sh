@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   his_nav.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
+/*   By: awali-al <awali-al@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 01:29:39 by aminewalial       #+#    #+#             */
-/*   Updated: 2020/02/28 16:36:17 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/11/10 12:05:02 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,16 +43,9 @@ static void	prev_line(t_hist **his, t_line *line)
 	{
 		home(line);
 		if (!line->tmp)
-		{
 			line->tmp = line->str;
-			dprintf(line->fdtty, "hi\n");
-		}
 		else if ((*his)->prv)
-		{
 			(*his) = (*his)->prv;
-			dprintf(line->fdtty, "going up\n");
-		}
-		dprintf(line->fdtty, "%d %s %p %p\n", (*his)->i, (*his)->cmd, (*his)->prv, (*his));
 		line->str = (*his)->cmd;
 		put_in_pos(line->str);
 		n = lines_in_cmd(line->str, line->prm, line->col) - n;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_line.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
+/*   By: awali-al <awali-al@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 13:46:50 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/28 16:35:29 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/11/10 12:05:23 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ static t_line	line_ini(char *prom, int c)
 	int				i;
 
 	ret.prm = prom ? to_putstr(prom) : display_prompt(c);
-	ret.fdtty = open("/dev/ttys003", O_WRONLY);
 	ioctl(0, TIOCGWINSZ, &ws);
 	tputs("\033[6n", 4, to_putchar);
 	i = read(0, &buf, 7);
@@ -117,7 +116,6 @@ char			*get_line(t_hist **his, char *prom, int c)
 	else
 		ret = ft_strdup(line.str);
 	ft_strdel(&line.str);
-	close(line.fdtty);
 	reset_input_mode();
 	return (ret);
 }

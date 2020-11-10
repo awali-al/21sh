@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   to_sh_rl.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
+/*   By: awali-al <awali-al@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 14:40:20 by awali-al          #+#    #+#             */
-/*   Updated: 2020/03/12 21:36:38 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/11/10 12:05:28 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ typedef struct			s_line
 	int					col;
 	int					row;
 	int					prm;
-	int					fdtty;
 }						t_line;
 
 typedef struct			s_hist
