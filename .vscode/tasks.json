@@ -1,0 +1,41 @@
+{
+    "tasks": [
+        {
+            "type": "cppbuild",
+            "label": "C/C++: gcc build active file",
+            "command": "/usr/bin/gcc",
+            "args": [
+                "-g",
+                "src/arrow_movement.c",
+                "src/ccp.c",
+                "src/curmove.c",
+                "src/edit_in_pos.c",
+                "src/envirenement.c",
+                "src/extra.c",
+                "src/get_line.c",
+                "src/highlight.c",
+                "src/his_nav.c",
+                "src/history.c",
+                "src/my_type.c",
+                "src/navigation.c",
+                "src/positions.c",
+                "src/term_set.c",
+                "src/to_sh.c",
+                "-o",
+                "readline"
+            ],
+            "options": {
+                "cwd": "/usr/bin"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "Generated task by Debugger"
+        }
+    ],
+    "version": "2.0.0"
+}

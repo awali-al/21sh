@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   to_sh.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
+/*   By: awali-al <awali-al@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/19 15:15:48 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/28 16:35:34 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/11/12 16:37:10 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 int		main(int ac, char **av, char **ev)
 {
 	t_hist	*his;
-	t_hist	*tmp;
 	char	*line;
 
 	(void)av;
@@ -24,20 +23,14 @@ int		main(int ac, char **av, char **ev)
 	his = open_hist();
 	ev = my_envirenement(ev);
 	line = ft_strdup("hi");
-	tmp = his;
-	while (tmp)
+	if (!term_set() && line && ft_strcmp(line, "exit"))
 	{
-		printf("%d |%s|\n", tmp->i, tmp->cmd);
-		tmp = tmp->prv;
+		ft_strdel(&line);
+		line = get_line(&his, NULL, ac);
+		write(1, "\n", 1);
+		printf("%s\n", line);
+		add_to_history(&his, line);
 	}
-	if (!term_set())
-		while (line && ft_strcmp(line, "exit"))
-		{
-			ft_strdel(&line);
-			line = get_line(&his, NULL, ac);
-			write(1, "\n", 1);
-			add_to_history(&his, line);
-		}
 	ev ? free_2d(&ev) : 0;
 	return (0);
 }
