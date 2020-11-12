@@ -6,7 +6,7 @@
 /*   By: awali-al <awali-al@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/25 14:40:20 by awali-al          #+#    #+#             */
-/*   Updated: 2020/11/10 12:05:28 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/11/12 18:34:44 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@
 
 # define HOME			4741915
 # define END			4610843
+
+# define SEPARATOR		-1
 
 typedef struct			s_pos
 {
@@ -125,6 +127,7 @@ int						navigation(t_line *line);
 int						edit_in_pos(t_line *line);
 int						arrow_movement(t_line *line);
 int						his_nav(t_hist **his, t_line *line);
+t_pos					get_curpos(void);
 
 int						my_type(char **line);
 #endif

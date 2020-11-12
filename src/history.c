@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   history.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: awali-al <awali-al@student.42.fr>          +#+  +:+       +#+        */
+/*   By: awali-al <awali-al@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 19:33:04 by awali-al          #+#    #+#             */
-/*   Updated: 2020/02/27 22:58:58 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/11/12 16:58:16 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static void		file_save(t_hist *his, char *str)
 	ft_strdel(&tmp);
 	tmp = ft_strjoin(idx, str);
 	ft_strdel(&idx);
-	idx = char_join(tmp, -1);
+	idx = char_join(tmp, SEPARATOR);
 	ft_strdel(&tmp);
 	write(fd, idx, ft_strlen(idx));
 	ft_strdel(&idx);
@@ -91,7 +91,7 @@ static char		*next_cmd(int fd)
 	ret = ft_strnew(1);
 	if (read(fd, buf, 0) == -1)
 		return (NULL);
-	while ((rd = read(fd, buf, 1)) && buf[0] != -1)
+	while ((rd = read(fd, buf, 1)) && buf[0] != SEPARATOR)
 	{
 		buf[1] = '\0';
 		tmp = ret;

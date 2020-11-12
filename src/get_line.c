@@ -6,7 +6,7 @@
 /*   By: awali-al <awali-al@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 13:46:50 by awali-al          #+#    #+#             */
-/*   Updated: 2020/11/10 12:05:23 by awali-al         ###   ########.fr       */
+/*   Updated: 2020/11/12 18:36:36 by awali-al         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,16 +74,18 @@ static t_line	line_ini(char *prom, int c)
 {
 	struct winsize	ws;
 	t_line			ret;
-	char			buf[8];
-	int				i;
+	// char			buf[8];
+	// int				i;
 
 	ret.prm = prom ? to_putstr(prom) : display_prompt(c);
 	ioctl(0, TIOCGWINSZ, &ws);
-	tputs("\033[6n", 4, to_putchar);
-	i = read(0, &buf, 7);
-	buf[i] = '\0';
-	ret.curp.col = ft_atoi(ft_strchr(buf, ';') + 1);
-	ret.curp.row = ft_atoi(buf + 2);
+	// tputs("\033[6n", 4, to_putchar);
+	ret.curp = get_curpos();
+	// write(1, "\033[6n", 4);
+	// i = read(0, &buf, 7);
+	// buf[i] = '\0';
+	// ret.curp.col = ft_atoi(ft_strchr(buf, ';') + 1);
+	// ret.curp.row = ft_atoi(buf + 2);
 	ret.str = ft_strnew(1);
 	ret.col = ws.ws_col;
 	ret.row = ws.ws_row;
